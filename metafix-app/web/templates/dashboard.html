@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+<div class="row" style="margin-bottom:12px"><h1 style="margin:0">{{ 'My consultations' if p.role == 'doctor' else 'All doctors' }}</h1>
+  <span class="muted small right" id="stamp"></span></div>
+<div class="grid4">
+  <div class="col"><h2>Today <span class="count" id="n-today"></span></h2><div id="today"></div></div>
+  <div class="col"><h2>Upcoming <span class="count" id="n-upcoming"></span></h2><div id="upcoming"></div></div>
+  <div class="col"><h2>Awaiting prescription <span class="count" id="n-awaiting_prescription"></span></h2><div id="awaiting_prescription"></div></div>
+  <div class="col"><h2>Completed <span class="count" id="n-completed"></span></h2><div id="completed"></div></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+function card(r, col) {
+  const canJoin = ME.role !== "admin" && col !== "completed";
+  return `<div class="bk" data-id="${r.id}">
+    <div class="row"><span class="nm"><a href="/patients/${r.patient.id}">${esc(r.patient.name)}</a></span>
+      <span class="small muted">${esc(r.patient.code)}</span></div>
+    <div class="when">${esc(r.slot_label)}${ME.role !== "doctor" && r.assigned_doctor_name ? " · " + esc(r.assigned_doctor_name) : ""}</div>
+    <div class="row" style="margin-top:6px">
+      <span class="badge ${r.intake_percent >= 60 ? "" : "warn"}">${esc(r.intake_badge)}</span>
+      ${r.consultation_status ? `<span class="badge grey">Rx ${esc(r.consultation_status)}</span>` : ""}
+      ${canJoin ? `<button class="btn sm primary right join">${col === "awaiting_prescription" ? "Open workspace" : "Join consultation"}</button>` : ""}
+      ${r.consultation_id && !canJoin ? `<a class="btn sm right" href="/consult/${r.consultation_id}">Open</a>` : ""}
+    </div></div>`;
+}
+async function load() {
+  const d = await api("GET", "/api/dashboard");
+  for (const k of Object.keys(d)) {
+    $("#" + k).innerHTML = d[k].length ? d[k].map(r => card(r, k)).join("") : '<div class="empty">None</div>';
+    $("#n-" + k).textContent = d[k].length ? `(${d[k].length})` : "";
+  }
+  $("#stamp").textContent = "Updated " + new Date().toLocaleTimeString("en-IN");
+}
+document.addEventListener("click", async e => {
+  if (!e.target.classList.contains("join")) return;
+  const id = e.target.closest(".bk").dataset.id;
+  const w = window.open("about:blank", "_blank");  // open synchronously so pop-up blockers allow it
+  try {
+    const r = await api("POST", `/api/bookings/${id}/join`);
+    if (r.meet_link && w) w.location = r.meet_link; else if (w) w.close();
+    if (r.warning) toast(r.warning, 5000);
+    location.href = r.workspace_url;
+  } catch (err) { if (w) w.close(); toast(err.message); }
+});
+load(); setInterval(load, 60000);
+</script>
+{% endblock %}

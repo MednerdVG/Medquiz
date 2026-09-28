@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{% block title %}Metafix Clinic Console{% endblock %}</title>
+<link rel="stylesheet" href="/static/app.css">
+{% block head %}{% endblock %}
+</head>
+<body>
+{% if p %}
+<header class="top">
+  <div class="brand">META<span>FIX</span></div>
+  <nav>
+    {% if p.role in ('admin','owner') %}<a href="/bookings" class="{{ 'on' if request.url.path.startswith('/bookings') }}">Bookings inbox</a>{% endif %}
+    <a href="/dashboard" class="{{ 'on' if request.url.path.startswith('/dashboard') }}">{{ 'My consultations' if p.role=='doctor' else 'Doctor dashboards' }}</a>
+    <a href="/patients" class="{{ 'on' if request.url.path.startswith('/patients') }}">Patients</a>
+    <a href="/availability" class="{{ 'on' if request.url.path.startswith('/availability') }}">Availability</a>
+    {% if p.role in ('admin','owner') %}<a href="/admin" class="{{ 'on' if request.url.path.startswith('/admin') }}">Settings{% if p.role=='owner' %} &amp; audit{% endif %}</a>{% endif %}
+  </nav>
+  <div class="who">{{ p.user.name }} · {{ p.role }}</div>
+  <form method="post" action="/auth/logout"><button class="btn sm">Sign out</button></form>
+</header>
+{% endif %}
+<main>{% block body %}{% endblock %}</main>
+<script src="/static/app.js"></script>
+<script>window.ME = {{ {'email': p.email, 'role': p.role, 'doctor_key': p.doctor_key} | tojson if p else 'null' }};</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

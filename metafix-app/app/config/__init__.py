@@ -103,7 +103,7 @@ class Settings:
     drive_root_folder_id: str = field(default_factory=lambda: os.environ.get("DRIVE_ROOT_FOLDER_ID", ""))
     # "fake" records outbound calls in the messages table / memory instead of hitting the network.
     integrations_mode: str = field(default_factory=lambda: os.environ.get("INTEGRATIONS_MODE", "fake"))
-    dev_login: bool = field(default_factory=lambda: os.environ.get("DEV_LOGIN", "1") == "1")
+    dev_login: bool = field(default_factory=lambda: os.environ.get("DEV_LOGIN", "0") == "1")
     intake_grace_days: int = field(default_factory=lambda: int(os.environ.get("INTAKE_GRACE_DAYS", "7")))
     send_intake_on: str = field(default_factory=lambda: os.environ.get("SEND_INTAKE_ON", "assignment"))  # assignment | booking
 

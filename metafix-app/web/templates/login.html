@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:420px;margin:60px auto;text-align:center">
+  <div style="font-weight:900;font-size:28px;letter-spacing:.06em">META<span style="color:var(--teal)">FIX</span></div>
+  <p class="muted">Clinic console — staff sign-in</p>
+  <p><a class="btn primary" href="/auth/google/login">Sign in with Google</a></p>
+  <p class="small muted">Only clinic Google accounts can sign in. Admin and owner accounts also need an authenticator code.</p>
+  {% if dev_login %}
+  <hr style="border:none;border-top:1px solid var(--rule);margin:18px 0">
+  <form method="post" action="/auth/dev-login" class="row" style="justify-content:center">
+    <input name="email" placeholder="seeded user email" required>
+    <button class="btn">Dev sign-in</button>
+  </form>
+  <p class="small muted">DEV_LOGIN is on — never enable it in production.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:440px;margin:60px auto">
+  <h1>Authenticator code</h1>
+  {% if enrol %}
+  <p>Add this account to your authenticator app (Google Authenticator, 1Password, Authy), then enter the 6-digit code.</p>
+  <p class="small">Setup key: <code style="font-size:15px">{{ enrol.secret }}</code></p>
+  <p class="small muted" style="word-break:break-all">{{ enrol.uri }}</p>
+  {% endif %}
+  {% if error %}<div class="issue block">{{ error }}</div>{% endif %}
+  <form method="post" action="/auth/2fa" class="row">
+    <input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required autofocus>
+    <button class="btn primary">Verify</button>
+  </form>
+</div>
+{% endblock %}

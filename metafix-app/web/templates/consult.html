@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Consultation workspace{% endblock %}
+{% block head %}<link rel="stylesheet" href="/static/consult.css">{% endblock %}
+{% block body %}
+<div class="ws">
+  <aside class="left" id="left"><div class="muted">Loading…</div></aside>
+  <section class="right">
+    <div class="wsbar">
+      <div id="title"><b>Consultation</b></div>
+      <span id="status" class="badge grey"></span><span id="savestate" class="small muted"></span>
+      <div class="right row">
+        <button class="btn" id="bPreview">Preview PDF</button>
+        <button class="btn primary" id="bApprove">Approve &amp; send</button>
+        <button class="btn" id="bAmend" hidden>Amend (new version)</button>
+      </div>
+    </div>
+    <div id="issues"></div>
+    <div id="suggest"></div>
+    <form id="rx" onsubmit="return false" autocomplete="off"></form>
+  </section>
+</div>
+<dialog id="preview" class="pv"><div class="row"><b>Preview</b><span class="small muted" id="pvinfo"></span>
+  <button class="btn right" onclick="$('#preview').close()">Close</button></div><iframe id="pvframe"></iframe></dialog>
+<dialog id="viewer" class="pv"><div class="row"><b id="vtitle">Reports</b>
+  <button class="btn sm" id="vrot">Rotate</button><button class="btn sm" id="vzin">Zoom +</button><button class="btn sm" id="vzout">Zoom −</button>
+  <button class="btn sm" id="vside">Side by side</button><button class="btn right" onclick="$('#viewer').close()">Close</button></div>
+  <div id="vbody" class="vbody"></div></dialog>
+<datalist id="dl-dx"></datalist><datalist id="dl-med"></datalist>
+{% endblock %}
+{% block scripts %}
+<script>const CID = {{ consultation_id | tojson }};</script>
+<script src="/static/consult.js"></script>
+{% endblock %}

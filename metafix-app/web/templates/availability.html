@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Availability{% endblock %}
+{% block body %}
+<div class="row" style="margin-bottom:12px"><h1 style="margin:0">Availability</h1>
+  <select id="doc" class="right" {% if p.role == 'doctor' %}disabled{% endif %}>
+  {% for k, d in doctors().items() %}<option value="{{ k }}" {% if p.doctor_key == k %}selected{% endif %}>{{ d.sign_name }}</option>{% endfor %}
+  </select></div>
+<div class="card"><h2>Weekly hours</h2><p class="small muted">Replaces the WhatsApp availability posts. Assignment warns when a slot falls outside these hours.</p>
+  <div id="weekly"></div><div class="row" style="margin-top:8px"><button class="btn" id="addw">+ Add window</button><button class="btn primary" id="savew">Save weekly hours</button></div></div>
+<div class="card"><h2>Day exceptions</h2>
+  <div class="row"><input type="date" id="exday"><input type="time" id="exstart"><input type="time" id="exend">
+    <select id="exkind"><option value="0">Blocked</option><option value="1">Extra availability</option></select>
+    <input id="exnote" placeholder="Note"><button class="btn" id="addex">Add</button></div>
+  <p class="small muted">Leave the times empty to block the whole day.</p>
+  <table class="list" id="extbl"></table></div>
+{% endblock %}
+{% block scripts %}
+<script>
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+let data = { weekly: [], exceptions: [] };
+function row(w) { return `<div class="row wrow" style="margin-bottom:6px"><select class="wd">${DAYS.map((d, i) => `<option value="${i}" ${i === w.weekday ? "selected" : ""}>${d}</option>`).join("")}</select>
+  <input type="time" class="ws" value="${w.start}"> to <input type="time" class="we" value="${w.end}"><button class="btn sm danger rm">Remove</button></div>`; }
+function draw() {
+  $("#weekly").innerHTML = data.weekly.map(row).join("") || '<div class="empty">No weekly hours set.</div>';
+  $("#extbl").innerHTML = data.exceptions.map(x => `<tr><td>${x.day}</td><td>${x.start ? x.start + "–" + x.end : "whole day"}</td>
+    <td>${x.available ? '<span class="badge">extra</span>' : '<span class="badge bad">blocked</span>'}</td><td>${esc(x.note || "")}</td>
+    <td><button class="btn sm danger rmx" data-id="${x.id}">Remove</button></td></tr>`).join("");
+}
+async function load() { data = await api("GET", "/api/availability/" + $("#doc").value); draw(); }
+$("#doc").onchange = load;
+$("#addw").onclick = () => { collect(); data.weekly.push({ weekday: 0, start: "10:00", end: "13:00" }); draw(); };
+function collect() { data.weekly = $$(".wrow").map(r => ({ weekday: +$(".wd", r).value, start: $(".ws", r).value, end: $(".we", r).value })); }
+document.addEventListener("click", async e => {
+  if (e.target.classList.contains("rm")) { e.target.closest(".wrow").remove(); collect(); }
+  if (e.target.classList.contains("rmx")) { data = await api("DELETE", `/api/availability/${$("#doc").value}/exceptions/${e.target.dataset.id}`); draw(); }
+});
+$("#savew").onclick = async () => { collect(); try { data = await api("PUT", `/api/availability/${$("#doc").value}/weekly`, data.weekly); draw(); toast("Saved"); } catch (err) { toast(err.message); } };
+$("#addex").onclick = async () => {
+  try { data = await api("POST", `/api/availability/${$("#doc").value}/exceptions`, { day: $("#exday").value,
+    start: $("#exstart").value || null, end: $("#exend").value || null, available: $("#exkind").value === "1", note: $("#exnote").value || null }); draw(); }
+  catch (err) { toast(err.message); }
+};
+load();
+</script>
+{% endblock %}

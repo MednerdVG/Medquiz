@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Your consultation details — Metafix</title>
+<link rel="stylesheet" href="/static/app.css">
+<style>
+body{background:#fff}main{max-width:560px;padding:0 14px 90px}
+.hero{background:var(--dark);color:#fff;margin:0 -14px 14px;padding:18px 16px}
+.hero .brand{font-weight:900;letter-spacing:.06em;font-size:20px}.hero .brand span{color:var(--teal)}
+section{border-top:1px solid var(--rule);padding:14px 0}section h2{margin-bottom:10px}
+.f{margin-bottom:12px}.f input,.f select,.f textarea{width:100%;font-size:16px;padding:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--rule);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.prog{flex:1;height:8px;background:#e8efec;border-radius:8px;overflow:hidden}.prog i{display:block;height:100%;background:var(--teal)}
+.up{display:flex;gap:8px;align-items:center;border:1px solid var(--rule);border-radius:8px;padding:8px;margin-bottom:6px;font-size:14px}
+.med{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:6px;margin-bottom:6px}.med input{font-size:15px;padding:8px}
+.consent{background:var(--soft);border-radius:8px;padding:12px;font-size:14px}
+.btn.big{font-size:16px;padding:11px 16px}
+</style></head>
+<body><main>
+<div class="hero"><div class="brand">META<span>FIX</span></div>
+  <div style="margin-top:6px">Your consultation: <b>{{ slot }}</b></div>
+  {% if meet_link %}<div style="margin-top:6px"><a href="{{ meet_link }}" style="color:var(--teal)">Google Meet link</a> — tap it at the time of your call</div>{% endif %}
+</div>
+<p class="small muted">{{ purpose }}</p>
+<p class="small">Everything saves automatically. You can close this page and come back with the same link.</p>
+
+<form id="f" autocomplete="on" onsubmit="return false">
+<section><h2>About you</h2>
+  <div class="f"><label>Full name</label><input name="name" autocomplete="name"></div>
+  <div class="two"><div class="f"><label>Age</label><input name="age" type="number" inputmode="numeric" min="0" max="120"></div>
+    <div class="f"><label>Sex</label><select name="sex"><option value=""></option><option value="F">Female</option><option value="M">Male</option><option value="O">Other</option></select></div></div>
+  <div class="two"><div class="f"><label>City</label><input name="city" autocomplete="address-level2"></div>
+    <div class="f"><label>Preferred language</label><input name="preferred_language" placeholder="English, Hindi, Marathi…"></div></div>
+</section>
+<section><h2>Your health</h2>
+  <div class="f"><label>What would you like help with?</label><textarea name="complaints" placeholder="e.g. weight gain, high sugar, tiredness"></textarea></div>
+  <div class="f"><label>Since when?</label><input name="duration" placeholder="e.g. 2 years"></div>
+  <div class="f"><label>Known conditions</label><textarea name="known_conditions" placeholder="e.g. diabetes 5 years, blood pressure 10 years"></textarea></div>
+  <label>Current medicines</label><div id="meds"></div><button type="button" class="btn sm" id="addmed">+ Add a medicine</button>
+  <div class="f" style="margin-top:12px"><label>Allergies</label><input name="allergies" placeholder="Write 'none' if none"></div>
+  <div class="f"><label>Operations / surgeries</label><input name="surgeries"></div>
+  <div class="f"><label>Family history</label><input name="family_history" placeholder="e.g. father — heart attack at 55"></div>
+  <div class="two"><div class="f"><label>Diet</label><select name="diet_type"><option value=""></option><option value="veg">Vegetarian</option><option value="eggetarian">Eggetarian</option><option value="mixed">Mixed (non-veg)</option><option value="vegan">Vegan</option><option value="jain">Jain</option></select></div>
+    <div class="f"><label>Sleep (hours)</label><input name="sleep_hours" type="number" step="0.5" inputmode="decimal"></div></div>
+  <div class="two"><div class="f"><label>Smoking</label><input name="smoking" placeholder="no / yes — how much"></div>
+    <div class="f"><label>Alcohol</label><input name="alcohol" placeholder="no / occasionally / weekly"></div></div>
+  <div class="f"><label>Occupation</label><input name="occupation"></div>
+</section>
+<section><h2>Measurements (if you have them)</h2>
+  <div class="two"><div class="f"><label>Weight (kg)</label><input name="vitals.weight_kg" type="number" step="0.1" inputmode="decimal"></div>
+    <div class="f"><label>Height (cm)</label><input name="vitals.height_cm" type="number" step="0.5" inputmode="decimal"></div></div>
+  <div class="two"><div class="f"><label>Waist (cm)</label><input name="vitals.waist_cm" type="number" step="0.5" inputmode="decimal"></div>
+    <div class="f"><label>Blood pressure</label><input name="vitals.bp" placeholder="130/85"></div></div>
+  <div class="two"><div class="f"><label>Pulse</label><input name="vitals.pulse" type="number" inputmode="numeric"></div>
+    <div class="f"><label>Fasting sugar</label><input name="vitals.fasting_sugar" placeholder="mg/dL"></div></div>
+</section>
+<section><h2>Reports and photos</h2>
+  <p class="small muted">Lab reports, scans, old prescriptions, ECGs. JPEG, PNG, HEIC or PDF, up to 25 MB each.</p>
+  <div class="two"><div class="f"><label>Type</label><select id="utag">{% for k, v in tags.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></div>
+    <div class="f"><label>Date of the report</label><input type="date" id="udate"></div></div>
+  <input type="file" id="ufile" accept="{{ accept }}" multiple style="display:none">
+  <div class="row"><button type="button" class="btn big" id="ucam">Take a photo</button><button type="button" class="btn big" id="ufiles">Choose files</button></div>
+  <div id="ustatus" class="small muted" style="margin:8px 0"></div>
+  <div id="uploads"></div>
+</section>
+<section><h2>Consent</h2>
+  <div class="consent" id="ctext">{{ consent_text }}</div>
+  <label style="text-transform:none;font-size:15px;color:var(--ink);margin-top:10px;display:flex;gap:8px;align-items:flex-start">
+    <input type="checkbox" id="consent" style="width:22px;height:22px"> I agree to a teleconsultation on these terms.</label>
+  <div id="cstamp" class="small muted"></div>
+</section>
+</form>
+</main>
+<div class="bar"><div class="prog"><i id="pbar"></i></div><span id="pct" class="small"></span><span id="saved" class="small muted"></span></div>
+<script src="/static/app.js"></script>
+<script>
+const T = {{ token | tojson }}; let S = {{ state | tojson }};
+const base = "/i/" + T;
+function getPath(o, p) { return p.split(".").reduce((a, k) => a == null ? a : a[k], o); }
+function fill() {
+  for (const el of $$("#f [name]")) { const v = getPath(S.data, el.name); if (v != null) el.value = v; }
+  drawMeds(S.data.current_medicines || []); drawUploads(); progress();
+  if (S.consent_given_at) { $("#consent").checked = true; $("#consent").disabled = true; $("#cstamp").textContent = "Consent recorded " + fmtWhen(S.consent_given_at); }
+}
+function progress() { $("#pbar").style.width = S.percent + "%"; $("#pct").textContent = `Intake ${S.percent}%`; }
+function drawMeds(list) {
+  if (!list.length) list = [{ name: "", dose: "", timing: "" }];
+  $("#meds").innerHTML = list.map(m => `<div class="med"><input placeholder="Medicine" class="mn" value="${esc(m.name)}">
+    <input placeholder="Dose" class="md" value="${esc(m.dose)}"><input placeholder="When" class="mt" value="${esc(m.timing)}">
+    <button type="button" class="btn sm rmm" aria-label="remove">✕</button></div>`).join("");
+}
+function meds() { return $$(".med").map(r => ({ name: $(".mn", r).value, dose: $(".md", r).value, timing: $(".mt", r).value })); }
+let pending = {};
+const flush = debounce(async () => {
+  const patch = pending; pending = {};
+  try { const r = await api("PATCH", base + "/data", patch); S.percent = r.percent; progress(); $("#saved").textContent = "Saved"; }
+  catch (e) { $("#saved").textContent = "Not saved — " + e.message; Object.assign(pending, patch); }
+}, 600);
+function queue(path, value) {
+  $("#saved").textContent = "Saving…";
+  if (path.startsWith("vitals.")) { pending.vitals = Object.assign(pending.vitals || {}, { [path.slice(7)]: value }); }
+  else pending[path] = value;
+  flush();
+}
+$("#f").addEventListener("input", e => {
+  const el = e.target;
+  if (el.closest(".med")) { queue("current_medicines", meds()); return; }
+  if (!el.name) return;
+  let v = el.value.trim(); if (el.type === "number") v = v === "" ? null : Number(v); if (v === "") v = null;
+  queue(el.name, v);
+});
+$("#addmed").onclick = () => { const m = meds(); m.push({ name: "", dose: "", timing: "" }); drawMeds(m); };
+$("#meds").addEventListener("click", e => { if (e.target.classList.contains("rmm")) { e.target.closest(".med").remove(); queue("current_medicines", meds()); } });
+function drawUploads() {
+  $("#uploads").innerHTML = S.uploads.map(u => `<div class="up"><span class="badge">${esc(u.tag_label)}</span><span style="flex:1;word-break:break-all">${esc(u.filename)}
+    <span class="muted">${u.report_date ? "· " + u.report_date : ""} · ${u.size_kb} KB</span></span><button type="button" class="btn sm rmu" data-id="${u.id}">Remove</button></div>`).join("");
+}
+$("#ucam").onclick = () => { $("#ufile").setAttribute("capture", "environment"); $("#ufile").click(); };
+$("#ufiles").onclick = () => { $("#ufile").removeAttribute("capture"); $("#ufile").click(); };
+$("#ufile").onchange = async () => {
+  for (const file of $("#ufile").files) {
+    if (file.size > 25 * 1024 * 1024) { toast(file.name + " is over 25 MB"); continue; }
+    $("#ustatus").textContent = "Uploading " + file.name + "…";
+    const fd = new FormData(); fd.append("file", file); fd.append("tag", $("#utag").value); if ($("#udate").value) fd.append("report_date", $("#udate").value);
+    try { S = await api("POST", base + "/uploads", fd); drawUploads(); progress(); $("#ustatus").textContent = "Uploaded " + file.name; }
+    catch (e) { $("#ustatus").textContent = file.name + ": " + e.message; }
+  }
+  $("#ufile").value = "";
+};
+$("#uploads").addEventListener("click", async e => {
+  if (!e.target.classList.contains("rmu")) return;
+  S = await api("DELETE", `${base}/uploads/${e.target.dataset.id}`); drawUploads();
+});
+$("#consent").onchange = async () => {
+  if (!$("#consent").checked) return;
+  try { const r = await api("POST", base + "/consent", { agree: true, text_shown: $("#ctext").textContent });
+    S.consent_given_at = r.consent_given_at; S = await api("GET", base + "/data"); fill(); }
+  catch (e) { $("#consent").checked = false; toast(e.message); }
+};
+fill();
+</script>
+</body></html>

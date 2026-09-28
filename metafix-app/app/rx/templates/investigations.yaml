@@ -1,0 +1,19 @@
+# Saved library of investigations with preparation instructions (brief §9 item 8, §22).
+- { name: "Fasting blood sugar (FBS)", instruction: "After 8–10 hours of fasting; water is allowed" }
+- { name: "Post-meal blood sugar (PPBS)", instruction: "2 hours after the first bite of a usual breakfast" }
+- { name: "HbA1c", instruction: "No fasting needed" }
+- { name: "Lipid profile", instruction: "10–12 hours of fasting; no alcohol for 24 hours" }
+- { name: "Thyroid profile (TSH, free T4)", instruction: "Take the thyroid tablet after the blood is drawn" }
+- { name: "Urine albumin-creatinine ratio (UACR)", instruction: "First-morning urine sample" }
+- { name: "Serum creatinine with eGFR", instruction: "No fasting needed" }
+- { name: "Liver function tests", instruction: "No fasting needed" }
+- { name: "CBC", instruction: "No fasting needed" }
+- { name: "Serum ferritin and iron studies", instruction: "Morning sample; stop iron tablets 3 days before" }
+- { name: "Vitamin B12 and vitamin D", instruction: "No fasting needed" }
+- { name: "Fasting insulin / C-peptide", instruction: "After 8–10 hours of fasting" }
+- { name: "Plasma renin and aldosterone", instruction: "Morning sample after 15 minutes of supine rest" }
+- { name: "Anti-tTG IgA (coeliac screen)", instruction: "Continue eating wheat until the test" }
+- { name: "Ultrasound abdomen", instruction: "6 hours of fasting; full bladder" }
+- { name: "ECG", instruction: "" }
+- { name: "2D echo", instruction: "" }
+- { name: "DEXA body composition", instruction: "No calcium tablets on the day of the scan" }

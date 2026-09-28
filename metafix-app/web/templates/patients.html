@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Patients{% endblock %}
+{% block body %}
+<div class="row" style="margin-bottom:12px"><h1 style="margin:0">Patients</h1>
+  <input id="q" class="right" placeholder="Search name, phone or ID" style="width:260px"></div>
+<div class="card" style="padding:0"><table class="list" id="tbl"><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Age / sex</th></tr></thead><tbody></tbody></table></div>
+{% endblock %}
+{% block scripts %}
+<script>
+const load = debounce(async () => {
+  const rows = await api("GET", "/api/patients?q=" + encodeURIComponent($("#q").value));
+  $("#tbl tbody").innerHTML = rows.map(r => `<tr><td>${esc(r.code)}</td><td><a href="/patients/${r.id}"><b>${esc(r.name)}</b></a></td>
+    <td>${esc(r.phone || "")}</td><td>${esc(r.email || "")}</td><td>${r.age_years ?? ""} ${esc(r.sex || "")}</td></tr>`).join("")
+    || '<tr><td colspan="5" class="empty">No patients.</td></tr>';
+}, 200);
+$("#q").oninput = load; load();
+</script>
+{% endblock %}

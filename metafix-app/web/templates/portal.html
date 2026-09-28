@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive"><title>Your prescriptions — Metafix</title>
+<link rel="stylesheet" href="/static/app.css"></head>
+<body><main style="max-width:560px">
+<div style="font-weight:900;letter-spacing:.06em;font-size:22px">META<span style="color:var(--teal)">FIX</span></div>
+<h1 style="margin-top:14px">Your prescriptions</h1>
+<p class="muted">{{ patient.name }} · {{ patient.patient_code }}</p>
+{% for r in rxs %}
+<div class="card row"><div><b>{{ r.file_name }}</b><div class="small muted">{{ r.approved_at.strftime('%d %b %Y') }}{% if r.version > 1 %} · amended (v{{ r.version }}){% endif %}</div></div>
+  <a class="btn primary right" href="/p/{{ token }}/rx/{{ r.id }}">Download</a></div>
+{% else %}<p class="empty">No prescriptions yet.</p>{% endfor %}
+<p class="small muted">This private link is only for you. Please do not forward it.</p>
+</main></body></html>

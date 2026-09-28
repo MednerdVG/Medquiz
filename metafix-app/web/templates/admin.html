@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block body %}
+<h1>Settings</h1>
+<div class="card"><h2>Booking intake sources</h2>
+  <p class="small muted">Superprofile has no documented public booking API — switch on the paths this account actually uses.</p>
+  <div id="sources"></div>
+  <div class="row" style="margin-top:10px">
+    <label style="text-transform:none;font-size:14px;color:var(--ink)"><input type="checkbox" id="rr"> Round-robin auto-assign (off by default)</label>
+    <label style="text-transform:none;font-size:14px;color:var(--ink)"><input type="checkbox" id="rem"> Reminders enabled</label>
+    <span>Send intake link on <select id="sio"><option value="assignment">assignment</option><option value="booking">booking</option></select></span>
+    <button class="btn primary right" id="save">Save</button></div>
+  <p class="small muted">Webhook URL: <code>/webhooks/bookings/superprofile</code> — sign the raw body with HMAC-SHA256 using the shared secret, header <code>X-Signature: sha256=&lt;hex&gt;</code>. The Zapier / Pipedream / Make bridge posts the normalised booking JSON to the same URL.</p>
+</div>
+<div class="card"><h2>Doctors</h2><table class="list" id="docs"></table></div>
+{% if p.role == 'owner' %}
+<div class="card"><h2>Staff accounts</h2><table class="list" id="users"></table>
+  <form class="row" id="userf" style="margin-top:10px"><input name="email" placeholder="email@{{ 'metafix.clinic' }}" required>
+    <input name="name" placeholder="Name" required><select name="role"><option>admin</option><option>doctor</option><option>owner</option></select>
+    <select name="doctor_key"><option value="">— doctor profile —</option>{% for k, d in doctors().items() %}<option value="{{ k }}">{{ d.sign_name }}</option>{% endfor %}</select>
+    <button class="btn">Save account</button></form></div>
+<div class="card"><h2>Audit log</h2><div class="row"><input id="aq" placeholder="entity id or actor"><button class="btn" id="ago">Filter</button></div>
+  <div style="overflow-x:auto;max-height:520px;overflow-y:auto"><table class="list" id="audit"></table></div></div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+const SOURCES = { superprofile_webhook: "Native Superprofile webhook / API", zapier: "Automation bridge (Zapier / Pipedream / Make)",
+  email_parsed: "Email ingestion (dedicated mailbox)", manual: "Manual entry and paste" };
+async function load() {
+  const s = await api("GET", "/api/settings");
+  $("#sources").innerHTML = Object.entries(SOURCES).map(([k, v]) => `<label style="text-transform:none;font-size:14px;color:var(--ink)">
+    <input type="checkbox" class="src" value="${k}" ${s.booking_sources.includes(k) ? "checked" : ""}> ${v}</label>`).join("");
+  $("#rr").checked = s.round_robin_auto_assign; $("#rem").checked = s.reminders_enabled; $("#sio").value = s.send_intake_on;
+  const docs = await api("GET", "/api/doctors");
+  $("#docs").innerHTML = "<tr><th>Doctor</th><th>Degrees (printed as given)</th><th>Reg. no.</th><th>Signature</th><th>Calendar</th></tr>" +
+    docs.map(d => `<tr><td>${esc(d.name)}</td><td>${esc(d.degrees)}</td><td>${esc(d.registration_no || "— add in doctors.yaml")}</td>
+      <td>${esc(d.sign_style)}</td><td>${d.calendar_connected ? '<span class="badge">connected</span>' : '<span class="badge warn">not connected</span>'}</td></tr>`).join("");
+  if (ME.role === "owner") { loadUsers(); loadAudit(); }
+}
+async function loadUsers() {
+  const u = await api("GET", "/api/users");
+  $("#users").innerHTML = "<tr><th>Email</th><th>Name</th><th>Role</th><th>Doctor</th><th>2FA</th><th>Calendar</th></tr>" +
+    u.map(x => `<tr><td>${esc(x.email)}</td><td>${esc(x.name)}</td><td>${esc(x.role)}</td><td>${esc(x.doctor_key || "")}</td>
+      <td>${x.has_2fa ? "yes" : "—"}</td><td>${x.calendar_connected ? "yes" : "—"}</td></tr>`).join("");
+}
+async function loadAudit() {
+  const q = $("#aq").value.trim(); const qs = q ? (q.includes("@") ? "?actor=" : "?entity_id=") + encodeURIComponent(q) : "";
+  const a = await api("GET", "/api/audit" + qs);
+  $("#audit").innerHTML = "<tr><th>When</th><th>Who</th><th>What</th><th>Entity</th><th>Detail</th></tr>" +
+    a.map(x => `<tr><td class="small">${fmtWhen(x.at)}</td><td class="small">${esc(x.actor)}</td><td>${esc(x.action)}</td>
+      <td class="small">${esc(x.entity)} ${esc((x.entity_id || "").slice(0, 8))}</td><td class="small muted">${esc(JSON.stringify(x.detail || {})).slice(0, 160)}</td></tr>`).join("");
+}
+$("#save").onclick = async () => {
+  try { await api("PUT", "/api/settings", { booking_sources: $$(".src").filter(c => c.checked).map(c => c.value),
+    round_robin_auto_assign: $("#rr").checked, reminders_enabled: $("#rem").checked, send_intake_on: $("#sio").value }); toast("Saved"); }
+  catch (err) { toast(err.message); }
+};
+if ($("#ago")) $("#ago").onclick = loadAudit;
+if ($("#userf")) $("#userf").onsubmit = async e => { e.preventDefault(); const f = Object.fromEntries(new FormData(e.target));
+  f.doctor_key = f.doctor_key || null; try { await api("POST", "/api/users", f); loadUsers(); e.target.reset(); } catch (err) { toast(err.message); } };
+load();
+</script>
+{% endblock %}

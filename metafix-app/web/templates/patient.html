@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Patient{% endblock %}
+{% block body %}
+<div id="root">Loading…</div>
+{% endblock %}
+{% block scripts %}
+<script>
+const PID = {{ patient_id | tojson }};
+async function load() {
+  const d = await api("GET", "/api/patients/" + PID);
+  const p = d.patient;
+  $("#root").innerHTML = `
+  <div class="row" style="margin-bottom:12px"><h1 style="margin:0">${esc(p.name)}</h1><span class="badge">${esc(p.code)}</span>
+    <span class="muted">${esc(p.phone || "")} ${p.email ? "· " + esc(p.email) : ""} ${p.age_years ? "· " + p.age_years + " y" : ""} ${esc(p.sex || "")}</span></div>
+  <div class="card"><h2>Prescriptions</h2>${d.prescriptions.length ? `<table class="list"><tr><th>File</th><th>Version</th><th>Approved</th><th>By</th><th>Delivery</th></tr>
+    ${d.prescriptions.map(r => `<tr><td><a href="${r.url}" target="_blank">${esc(r.file_name)}</a>${r.amendment_note ? `<div class="small muted">Amendment: ${esc(r.amendment_note)}</div>` : ""}</td>
+      <td>v${r.version}</td><td>${fmtWhen(r.approved_at)}</td><td class="small">${esc(r.approved_by)}</td>
+      <td class="small">${r.delivery ? r.delivery.channels.map(c => esc(c.channel + ": " + c.status)).join("<br>") + (r.delivery.drive.ok ? "<br>Drive: archived" : "<br>Drive: " + esc(r.delivery.drive.error || "pending")) : "pending"}</td></tr>`).join("")}</table>` : '<div class="empty">None yet.</div>'}</div>
+  <div class="card"><h2>Consultations</h2>${d.consultations.length ? `<table class="list"><tr><th>Date</th><th>Doctor</th><th>Status</th><th></th></tr>
+    ${d.consultations.map(c => `<tr><td>${esc(c.consult_date || "")}</td><td>${esc(c.doctor_key)}</td><td>${esc(c.status)}</td>
+      <td class="row"><a class="btn sm" href="/consult/${c.id}">Open</a>${c.status === "approved" && ME.role !== "admin" ? `<button class="btn sm fu" data-id="${c.id}">New visit from this consultation</button>` : ""}</td></tr>`).join("")}</table>` : '<div class="empty">None yet.</div>'}</div>
+  <div class="card"><h2>Bookings</h2>${d.bookings.length ? `<table class="list"><tr><th>Slot</th><th>Doctor</th><th>Status</th><th>Intake</th></tr>
+    ${d.bookings.map(b => `<tr><td>${esc(b.slot_label)}</td><td>${esc(b.assigned_doctor_name || "—")}</td><td>${esc(b.status)}</td><td>${esc(b.intake_badge)}</td></tr>`).join("")}</table>` : '<div class="empty">None.</div>'}</div>
+  ${ME.role === "owner" ? `<div class="card"><h2>Data deletion (DPDP)</h2><p class="small muted">Permanently erases this patient's personal data, uploads and PDFs. Check prescription-retention obligations first. This is logged.</p>
+    <button class="btn danger" id="erase">Erase patient data…</button></div>` : ""}`;
+}
+document.addEventListener("click", async e => {
+  if (e.target.classList.contains("fu")) {
+    try { const w = await api("POST", `/api/consultations/${e.target.dataset.id}/follow-up`, {}); location.href = "/consult/" + w.consultation.id; }
+    catch (err) { toast(err.message); }
+  }
+  if (e.target.id === "erase") {
+    const code = prompt("Type the patient ID to confirm permanent erasure"); if (!code) return;
+    const reason = prompt("Reason / request reference") || "";
+    try { await api("POST", `/api/patients/${PID}/erase`, { confirm_code: code, reason }); location.href = "/patients"; }
+    catch (err) { toast(err.message); }
+  }
+});
+load();
+</script>
+{% endblock %}

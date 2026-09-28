@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Bookings inbox{% endblock %}
+{% block body %}
+<div class="row" style="margin-bottom:12px">
+  <h1 style="margin:0">Bookings inbox</h1>
+  <select id="filter" class="right">
+    <option value="unassigned">Unassigned</option><option value="">All</option>
+    <option value="assigned">Assigned</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option>
+  </select>
+  <button class="btn" onclick="$('#newbk').showModal()">+ Manual booking</button>
+  <button class="btn" onclick="$('#paste').showModal()">Paste confirmation</button>
+</div>
+<div class="card" style="padding:0;overflow-x:auto">
+<table class="list" id="tbl"><thead><tr><th>Patient</th><th>Slot</th><th>Service</th><th>Amount</th><th>Source</th><th>Intake</th><th>Doctor</th><th></th></tr></thead><tbody></tbody></table>
+</div>
+
+<dialog id="newbk" style="border:none;border-radius:10px;max-width:520px;width:95%">
+  <h2>Manual booking</h2>
+  <form id="newbkf">
+    <div class="row"><div style="flex:1"><label>Name</label><input name="name" required style="width:100%"></div></div>
+    <div class="row"><div style="flex:1"><label>Phone</label><input name="phone" required style="width:100%"></div>
+      <div style="flex:1"><label>Email</label><input name="email" type="email" style="width:100%"></div></div>
+    <div class="row"><div><label>Slot start</label><input name="slot_start" type="datetime-local" required></div>
+      <div><label>Minutes</label><input name="duration" type="number" value="30" style="width:80px"></div>
+      <div><label>Amount ₹</label><input name="amount" type="number" style="width:100px"></div></div>
+    <div><label>Service</label><input name="service" value="Metabolic consultation — 30 min" style="width:100%"></div>
+    <div><label>Notes from booking</label><textarea name="notes"></textarea></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary">Create</button><button type="button" class="btn" onclick="$('#newbk').close()">Cancel</button></div>
+  </form>
+</dialog>
+<dialog id="paste" style="border:none;border-radius:10px;max-width:620px;width:95%">
+  <h2>Paste a Superprofile confirmation</h2>
+  <textarea id="pastetext" style="min-height:220px" placeholder="Paste the confirmation email text here"></textarea>
+  <div class="row" style="margin-top:10px"><button class="btn primary" id="pastego">Create booking</button><button class="btn" onclick="$('#paste').close()">Cancel</button></div>
+</dialog>
+{% endblock %}
+{% block scripts %}
+<script>
+let doctorList = [];
+async function load() {
+  if (!doctorList.length) doctorList = await api("GET", "/api/doctors");
+  const st = $("#filter").value;
+  const rows = await api("GET", "/api/bookings" + (st ? "?status=" + st : ""));
+  $("#tbl tbody").innerHTML = rows.length ? rows.map(r => `
+    <tr data-id="${r.id}">
+      <td><a href="/patients/${r.patient.id}"><b>${esc(r.patient.name)}</b></a><div class="small muted">${esc(r.patient.code)} · ${esc(r.patient.phone || "")}</div>
+        ${r.needs_review ? '<span class="badge warn">parsed from email — review</span>' : ""}</td>
+      <td>${esc(r.slot_label)}</td><td class="small">${esc(r.service || "")}</td>
+      <td>${r.amount_paid ? "₹" + r.amount_paid : ""} <span class="small muted">${esc(r.payment_status || "")}</span></td>
+      <td><span class="badge grey">${esc(r.source)}</span></td>
+      <td><span class="badge ${r.intake_percent >= 60 ? "" : "grey"}">${esc(r.intake_badge)}</span></td>
+      <td><select class="assign">${'<option value="">— assign —</option>' + doctorList.map(d => `<option value="${d.key}" ${d.key === r.assigned_doctor ? "selected" : ""}>${esc(d.name)}${d.calendar_connected ? "" : " (no calendar)"}</option>`).join("")}</select>
+        ${r.meet_link ? `<div class="small"><a href="${esc(r.meet_link)}" target="_blank" rel="noopener">Meet link</a>${r.meet_link_manual ? " (manual)" : ""}</div>` : ""}</td>
+      <td class="row">
+        ${r.needs_review ? '<button class="btn sm rev">Mark reviewed</button>' : ""}
+        <button class="btn sm resend">Resend intake link</button>
+        <button class="btn sm link">Paste Meet link</button>
+        <button class="btn sm danger cancel">Cancel</button></td>
+    </tr>`).join("") : '<tr><td colspan="8" class="empty">Nothing here.</td></tr>';
+}
+$("#filter").onchange = load;
+$("#tbl").addEventListener("change", async e => {
+  if (!e.target.classList.contains("assign") || !e.target.value) return;
+  const id = e.target.closest("tr").dataset.id;
+  let res = await api("POST", `/api/bookings/${id}/assign`, { doctor_key: e.target.value });
+  if (!res.assigned && res.conflicts.length) {
+    if (!confirm("Conflict: " + res.conflicts.join("; ") + "\n\nAssign anyway?")) return load();
+    res = await api("POST", `/api/bookings/${id}/assign`, { doctor_key: e.target.value, force: true });
+  }
+  toast(res.warning ? "Assigned — " + res.warning : "Assigned · Meet " + res.meet_action);
+  load();
+});
+$("#tbl").addEventListener("click", async e => {
+  const tr = e.target.closest("tr"); if (!tr) return; const id = tr.dataset.id;
+  try {
+    if (e.target.classList.contains("resend")) { await api("POST", `/api/bookings/${id}/resend-intake`); toast("Intake link sent"); }
+    if (e.target.classList.contains("rev")) { await api("POST", `/api/bookings/${id}/reviewed`); load(); }
+    if (e.target.classList.contains("cancel") && confirm("Cancel this booking?")) { await api("POST", `/api/bookings/${id}/cancel`); load(); }
+    if (e.target.classList.contains("link")) {
+      const l = prompt("Paste the meeting link (https://…)"); if (l) { await api("POST", `/api/bookings/${id}/meet-link`, { meet_link: l }); load(); }
+    }
+  } catch (err) { toast(err.message); }
+});
+$("#newbkf").onsubmit = async e => {
+  e.preventDefault(); const f = new FormData(e.target);
+  const start = new Date(f.get("slot_start"));
+  try {
+    const r = await api("POST", "/api/bookings", { slot_start: start.toISOString(), duration_minutes: +f.get("duration") || 30,
+      service: f.get("service"), amount_paid: f.get("amount") ? +f.get("amount") : null,
+      patient: { name: f.get("name"), phone: f.get("phone"), email: f.get("email") || null, notes_from_booking: f.get("notes") || null } });
+    $("#newbk").close(); toast(r.notes.length ? r.notes.join("; ") : "Booking created"); load();
+  } catch (err) { toast(err.message); }
+};
+$("#pastego").onclick = async () => {
+  try { const r = await api("POST", "/api/bookings/paste", { text: $("#pastetext").value });
+    $("#paste").close(); toast(r.created ? "Booking created" : "Already in the inbox"); load(); } catch (err) { toast(err.message); }
+};
+load();
+</script>
+{% endblock %}
