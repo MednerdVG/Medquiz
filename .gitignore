@@ -7,3 +7,4 @@ metafix-app/out/
 .env
 node_modules/
 metafix-app.zip
+metafix-app/metafix_local.db
