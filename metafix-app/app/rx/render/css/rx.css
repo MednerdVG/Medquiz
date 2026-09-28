@@ -1,0 +1,169 @@
+/* MetaFix prescription — A4, zero margins. Geometry in mm so the packer's
+   capacities match print exactly. Page 1 body ≈ 210 mm, pages 2+ ≈ 219 mm. */
+:root {
+  --teal: #2ec9a4;
+  --dark: #0f1c24;
+  --soft: #f3faf7;
+  --ink: #1d2a31;
+  --muted: #5c6b73;
+  --rule: #d5e3de;
+  --zebra: #f7fbfa;
+}
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Lato", "Carlito", "Liberation Sans", Arial, sans-serif;
+  font-size: 9.3pt; line-height: 1.38; color: var(--ink);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  font-kerning: normal; text-rendering: geometricPrecision;
+  font-variant-ligatures: none; /* keeps PDF text searchable: 'fi' not 'ﬁ' */
+}
+
+/* ---------------------------------------------------------------- page */
+.page {
+  width: 210mm; height: 297mm; position: relative; overflow: hidden;
+  page-break-after: always; break-after: page; background: #fff;
+  display: flex; flex-direction: column;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+
+/* letterhead band — 44 mm including member bar */
+.lh { height: 38mm; background: var(--dark); color: #fff; display: flex;
+      align-items: center; justify-content: space-between; padding: 0 14mm; position: relative; flex: none; }
+.lh::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.6mm; background: var(--teal); }
+.lh-brand { display: flex; align-items: center; gap: 4mm; }
+.lh-logo { height: 20mm; max-width: 40mm; }
+.lh-word { font-size: 22pt; font-weight: 900; letter-spacing: 0.06em; line-height: 1; }
+.lh-word span { color: var(--teal); }
+.lh-tag { font-size: 8pt; letter-spacing: 0.14em; text-transform: uppercase; color: #b8c7cd; margin-top: 1.5mm; }
+.lh-doc { text-align: right; }
+.lh-doc-name { font-size: 14.5pt; font-weight: 700; }
+.lh-doc-deg { font-size: 8.6pt; letter-spacing: 0.08em; color: var(--teal); font-weight: 700; margin-top: 0.6mm; }
+.lh-doc-spec { font-size: 8.4pt; color: #d6e2e6; margin-top: 0.6mm; }
+.lh-doc-reg { font-size: 7.8pt; color: #b8c7cd; margin-top: 0.6mm; }
+.member-bar { height: 6mm; background: var(--soft); color: var(--dark); font-size: 7.6pt;
+              letter-spacing: 0.12em; text-transform: uppercase; display: flex; align-items: center;
+              justify-content: center; border-bottom: 0.3mm solid var(--rule); flex: none; }
+
+/* top strip (page 1) / continuation strip (pages 2+) */
+.top-strip { height: 11mm; margin: 4mm 14mm 0; display: flex; align-items: center; justify-content: space-between;
+             border-bottom: 0.5mm solid var(--dark); flex: none; }
+.top-strip .doc-type { font-size: 11pt; font-weight: 900; letter-spacing: 0.12em; color: var(--dark); }
+.top-strip .doc-type small { font-weight: 700; color: var(--teal); letter-spacing: 0.08em; margin-left: 2mm; font-size: 8.4pt; }
+.top-strip .doc-date { font-size: 9pt; font-weight: 700; color: var(--muted); }
+.cont-strip { height: 6mm; margin: 0 14mm; display: flex; align-items: center; font-size: 7.8pt; font-weight: 700;
+              letter-spacing: 0.1em; color: var(--muted); border-bottom: 0.3mm solid var(--rule); flex: none; }
+
+/* body — flex:1 fills to the footer; the packer measures its inner height */
+.page-body { flex: 1 1 auto; padding: 4mm 14mm 4mm; overflow: hidden; position: relative; }
+.page-body-inner { width: 182mm; }
+
+/* footer — 20 mm */
+.ft { height: 20mm; background: var(--dark); color: #cfdade; padding: 3mm 14mm 0; font-size: 7.4pt; flex: none; position: relative; }
+.ft::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 0.9mm; background: var(--teal); }
+.ft-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.2mm; }
+.ft-tag { color: var(--teal); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.ft-page { font-weight: 700; color: #fff; }
+
+/* ---------------------------------------------------------------- chunks */
+.chunk { padding-bottom: 3.2mm; }
+/* row-group continuation on the same page: re-join visually (only ever shrinks height) */
+.chunk.gprev { padding-bottom: 0; }
+.chunk.joined thead { display: none; }
+.sec-h { display: flex; align-items: center; gap: 2mm; font-size: 9.8pt; font-weight: 900; letter-spacing: 0.08em;
+         color: var(--dark); margin: 0 0 1.6mm; text-transform: uppercase; }
+.sec-h .n { display: inline-flex; width: 5.4mm; height: 5.4mm; border-radius: 50%; background: var(--teal); color: #fff;
+            align-items: center; justify-content: center; font-size: 8pt; letter-spacing: 0; flex: none; }
+.sec-h::after { content: ""; flex: 1; height: 0.3mm; background: var(--rule); }
+.sub-h { font-size: 8.6pt; font-weight: 900; letter-spacing: 0.08em; color: var(--dark); margin: 0 0 1.2mm; text-transform: uppercase; }
+.sub-h.teal { color: #169e7f; }
+p { margin: 0 0 1.4mm; }
+ul.b { margin: 0; padding-left: 4.6mm; }
+ul.b li { margin: 0 0 0.8mm; }
+ul.b li::marker { color: var(--teal); }
+.small { font-size: 8pt; color: var(--muted); }
+.note { font-size: 8pt; color: var(--muted); margin-top: 1.2mm; }
+.anchor { font-size: 7.8pt; color: #7a8a91; font-style: italic; }
+
+/* pd — patient details grid */
+.pd { display: grid; grid-template-columns: 1fr 1fr; border: 0.3mm solid var(--rule); border-radius: 1.2mm; overflow: hidden; }
+.pd .cell { display: flex; padding: 1.05mm 2.4mm; border-bottom: 0.3mm solid var(--rule); min-height: 5.6mm; }
+.pd .cell.left { border-right: 0.3mm solid var(--rule); }
+.pd .cell.wide { grid-column: 1 / span 2; }
+.pd .l { width: 30mm; flex: none; font-size: 7.8pt; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; padding-top: 0.3mm; }
+.pd .v { font-weight: 700; color: var(--dark); }
+.pd .cell.name .v { font-size: 10.4pt; }
+.pd .cell.last { border-bottom: none; }
+
+/* vit — vitals strip */
+.vit { display: flex; margin-top: 2.4mm; border-radius: 1.2mm; overflow: hidden; border: 0.3mm solid var(--dark); }
+.vit .c { flex: 1 1 0; border-right: 0.3mm solid var(--rule); }
+.vit .c:last-child { border-right: none; }
+.vit .h { background: var(--dark); color: #fff; font-size: 7.2pt; font-weight: 900; letter-spacing: 0.08em; padding: 1mm 1.6mm; text-align: center; }
+.vit .val { padding: 1.4mm 1.6mm 1.2mm; text-align: center; font-weight: 700; font-size: 9pt; color: var(--dark); }
+.vit .sub, .vit .earlier { display: block; font-size: 6.8pt; font-weight: 400; color: var(--muted); }
+
+/* data tables */
+table.t { width: 100%; border-collapse: collapse; font-size: 8.8pt; }
+table.t th { background: var(--dark); color: #fff; font-size: 7.6pt; font-weight: 900; letter-spacing: 0.06em;
+             text-transform: uppercase; text-align: left; padding: 1.3mm 2mm; }
+table.t td { padding: 0.95mm 2mm; border-bottom: 0.25mm solid var(--rule); vertical-align: top; }
+table.t tbody tr:nth-child(even) td { background: var(--zebra); }
+table.t td.num { width: 7mm; color: var(--muted); font-weight: 700; }
+table.t tr.hl td { font-weight: 700; color: #000; }
+table.t tr.hl td.flag { color: #c0392b; }
+table.t .gen { display: block; font-size: 7.6pt; color: var(--muted); font-weight: 400; }
+table.t .brand { font-weight: 700; color: var(--dark); }
+table.t td.slot { width: 30mm; font-weight: 700; color: var(--dark); }
+table.t td.opt-l { color: #169e7f; font-weight: 900; padding-right: 0; width: 4mm; }
+table.two-col td { width: 50%; }
+.opts { margin: 0; padding: 0; list-style: none; }
+.opts li { display: inline; margin: 0 2.6mm 0 0; }
+.opts li + li::before { content: "·"; color: #9fb3ab; margin-right: 2.6mm; }
+.opts li b { color: #169e7f; margin-right: 1mm; }
+
+/* box — teal-rule callout */
+.box { background: var(--soft); border-left: 1.2mm solid var(--teal); border-radius: 0 1.2mm 1.2mm 0; padding: 2.2mm 3mm; }
+.box .box-t { font-size: 8.4pt; font-weight: 900; letter-spacing: 0.08em; color: var(--dark); margin-bottom: 1.2mm; text-transform: uppercase; }
+.box.warn { border-left-color: #e0a526; background: #fff8ea; }
+.box.stop { border-left-color: #c0392b; background: #fdf1ef; }
+.box + .box { margin-top: 2mm; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.do-h { color: #169e7f; } .dont-h { color: #c0392b; }
+
+/* chart — bordered white-cell log */
+table.chart { width: 100%; border-collapse: collapse; font-size: 8pt; }
+table.chart th { background: var(--dark); color: #fff; font-size: 7.2pt; padding: 1mm 1.4mm; text-align: center; font-weight: 900; letter-spacing: 0.05em; }
+table.chart td { border: 0.3mm solid #9fb3ab; height: 6.4mm; background: #fff; }
+table.chart td.lab { width: 30mm; white-space: nowrap; font-weight: 700; padding: 0 1.6mm; color: var(--dark); background: var(--soft); }
+.chart-target { font-weight: 700; margin: 1.4mm 0 0.6mm; }
+
+/* sig — signature block */
+.sig-wrap { display: flex; justify-content: flex-end; gap: 10mm; margin-top: 2mm; }
+.sig { width: 72mm; text-align: left; }
+.sig img { max-height: 13mm; max-width: 50mm; display: block; margin-bottom: 0.6mm; }
+.sig .sig-space { height: 11mm; }
+.sig.typed .sig-space { height: 3mm; }
+.sig .sig-name { font-weight: 900; font-size: 10pt; color: var(--dark); border-top: 0.3mm solid var(--dark); padding-top: 1mm; }
+.sig .sig-sub { font-size: 7.8pt; color: var(--muted); }
+.sig-meta { font-size: 8pt; color: var(--muted); }
+
+/* cert — bordered certificate frame */
+.cert { border: 0.8mm double var(--dark); border-radius: 1.5mm; padding: 9mm 11mm; min-height: 150mm; position: relative; }
+.cert-title { text-align: center; font-size: 15pt; font-weight: 900; letter-spacing: 0.18em; color: var(--dark); margin-bottom: 1.5mm; }
+.cert-rule { width: 30mm; height: 0.8mm; background: var(--teal); margin: 0 auto 7mm; }
+.cert-body { font-size: 10.6pt; line-height: 1.75; }
+.cert-body p { margin: 0 0 3.5mm; }
+.cert-meta { margin-top: 6mm; font-size: 10pt; }
+.cert-sign { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14mm; }
+.stamp { width: 42mm; height: 30mm; border: 0.4mm dashed #8aa39a; border-radius: 1.5mm; color: #8aa39a;
+         font-size: 7.6pt; letter-spacing: 0.12em; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
+.cert-sig { width: 80mm; }
+.cert-sig .ruled { height: 18mm; border-bottom: 0.3mm solid var(--dark); }
+.cert-sig .nm { font-weight: 900; margin-top: 1.2mm; font-size: 10pt; }
+.cert-sig .q { font-size: 8.4pt; color: var(--muted); }
+.cert-sig .ss { font-size: 8pt; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1.4mm; color: var(--dark); font-weight: 700; }
+
+/* measurement column */
+.measure { position: absolute; left: 0; top: 0; width: 182mm; visibility: hidden; }

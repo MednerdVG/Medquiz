@@ -1,0 +1,14 @@
+id: smoking_alcohol_cessation
+version: "1.0"
+title: "CIGARETTES AND ALCOHOL"
+columns:
+  - title: "CIGARETTES"
+    bullets:
+      - "Set a quit date within the next 2 weeks and tell family and friends."
+      - "Remove cigarettes, lighters and ashtrays from home and car."
+      - "Cravings pass in 5–10 minutes — drink water, walk, chew sugar-free gum."
+  - title: "ALCOHOL"
+    bullets:
+      - "Keep at least 3 alcohol-free days every week."
+      - "Never drink on an empty stomach or while your sugar is low."
+      - "Avoid alcohol completely on the advised medicines if told so."

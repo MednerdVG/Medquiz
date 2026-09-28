@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "consultation_id": "8b0c7f0e-6c1d-4c7e-9a51-0d7a1c3f2b11",
+    "booking_id": null,
+    "consult_date": "2026-09-28",
+    "consult_type": "teleconsult",
+    "visit_number": 1,
+    "seen_by": "vishal_gabale",
+    "created_by": "coordinator@metafix.clinic",
+    "section_order_preset": "standard",
+    "status": "draft"
+  },
+  "patient": {
+    "name": "Mrs. Afsha Khan",
+    "age_years": 55,
+    "sex": "F",
+    "patient_id": "MFX-00231",
+    "diet_type": "mixed",
+    "allergies": ["nil known"],
+    "known_conditions": ["Diabetes 5–6 years", "Hypertension 10 years"],
+    "family_history": ["Ischaemic heart disease"],
+    "extra_rows": [
+      { "label": "Resident of", "value": "Uganda" },
+      { "label": "Status", "value": "Married, 2 children · post-menopausal" },
+      { "label": "Reports", "value": "Thyrocare — 05 September 2026" },
+      { "label": "Current medicines", "value": "S-amlodipine 5 mg · Rosuvastatin 10 mg" }
+    ]
+  },
+  "vitals": {
+    "weight_kg": 99.8,
+    "height_cm": 165,
+    "strip": [
+      { "label": "WEIGHT", "value": "99.8 kg" },
+      { "label": "HEIGHT", "value": "165 cm" },
+      { "label": "WAIST", "value": "112 cm" },
+      { "label": "BP", "value": "154/105 mmHg" },
+      { "label": "HbA1c", "value": "8.8 %" }
+    ]
+  },
+  "complaints": [
+    { "text": "Reflux — long-standing", "pointer": "Endoscopy 3 times; H. pylori positive 3 times" },
+    { "text": "Weight gain over 2 years", "pointer": "About 12 kg" },
+    { "text": "Tiredness through the day" }
+  ],
+  "diagnoses": [
+    { "text": "Type 2 diabetes mellitus — uncontrolled" },
+    { "text": "Hypertension — uncontrolled" },
+    { "text": "Obesity class III (Asian-Indian cut-off)" },
+    { "text": "Gastro-oesophageal reflux disease" }
+  ],
+  "labs": [
+    { "test": "HbA1c", "value": "8.8 %", "remark": "Target under 7", "highlight": true },
+    { "test": "Fasting blood sugar", "value": "171 mg/dL", "remark": "High", "highlight": true },
+    { "test": "LDL cholesterol", "value": "96 mg/dL", "remark": "Target under 70" },
+    { "test": "Creatinine", "value": "0.8 mg/dL", "remark": "Normal" },
+    { "test": "TSH", "value": "2.4 µIU/mL", "remark": "Normal" }
+  ],
+  "labs_footnote": "Relevant normals: CBC, liver enzymes, urine routine.",
+  "plain_terms": {
+    "title": "WHAT THIS MEANS IN PLAIN TERMS",
+    "paragraphs": [
+      "Your average sugar over three months is above target, and your blood pressure is high.",
+      "The new tablets lower sugar and protect the heart and kidneys; the diet and exercise plan below matter as much as the tablets."
+    ]
+  },
+  "investigations": [
+    { "name": "Fasting blood sugar (FBS)", "instruction": "After 8–10 hours of fasting", "timing": "at 3 months" },
+    { "name": "HbA1c", "instruction": "No fasting needed", "timing": "at 3 months" },
+    { "name": "Urine albumin-creatinine ratio", "instruction": "First-morning urine sample", "timing": "at 3 months" }
+  ],
+  "medications": {
+    "stopped": [ { "name": "Tab. Gemer 2", "reason": "replaced by the treatment below" } ],
+    "started": [
+      { "name": "Tab. Xilingio 25/5", "generic": "empagliflozin + linagliptin", "dose": "1–0–0",
+        "timing": "in the morning", "duration": "3 months", "note": "To be tapered to plain empagliflozin after 1 month" },
+      { "name": "Tab. Glycomet SR 500", "generic": "metformin", "dose": "1–0–1", "timing": "with meals", "duration": "3 months" }
+    ],
+    "continued": [
+      { "name": "Tab. Eritel CH 80/12.5", "generic": "telmisartan + chlorthalidone", "dose": "1–0–0", "purpose": "Blood pressure" },
+      { "name": "Tab. Rosuvas 10", "generic": "rosuvastatin", "dose": "0–0–1", "purpose": "Cholesterol" }
+    ],
+    "sos": [ { "name": "Tab. Lanol ER", "generic": "paracetamol", "note": "Not more than 3 tablets in 24 hours" } ]
+  },
+  "diet_plan": { "template": "diabetes_mixed" },
+  "exercise_plan": { "template": "strength_cardio_stepup" },
+  "advice_blocks": ["sglt2_precautions", "sick_day_rules"],
+  "charts": ["sugar_log_2x_week"],
+  "referrals": [],
+  "contacts": [ { "label": "For any queries", "name": "Dr. Adwait", "number": null } ],
+  "follow_up": { "interval": "3 months", "bring": ["all old reports", "the sugar log"],
+                 "report_sooner_if": ["sugar below 70 mg/dL", "burning while passing urine"] },
+  "certificates": []
+}

@@ -1,0 +1,10 @@
+id: sick_day_rules
+version: "1.0"
+title: "SICK-DAY RULES"
+style: warn
+intro: "On days with fever, vomiting, loose motions or when you cannot eat or drink normally:"
+bullets:
+  - "Pause SGLT2 tablets (empagliflozin, dapagliflozin), metformin and water tablets until you are eating and drinking normally for 24–48 hours."
+  - "Keep sipping fluids — water, ORS, buttermilk, clear soups."
+  - "Check sugars more often; do not stop insulin without speaking to the clinic."
+  - "Call the clinic if you cannot keep fluids down, feel breathless or very drowsy."

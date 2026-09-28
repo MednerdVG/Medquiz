@@ -1,0 +1,29 @@
+id: iron_rich
+version: "1.0"
+title: "DIET PLAN — IRON RICH"
+target: { kcal: "as per usual diet", protein: "60–70 g/day", other: "iron-rich food at 2 meals daily with vitamin C" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water; no tea or coffee within 1 hour of meals"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Ragi dosa / nachni bhakri + chutney", "Poha with peanuts and lemon", "2 eggs + spinach"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["Guava or orange", "Amla (1–2)"]
+  - key: lunch
+    time: "Lunch"
+    options: ["Palak dal + 2 phulka + salad with lemon", "Rajma/chole + rice + salad", "Chicken/fish/mutton liver (occasionally) + vegetables"]
+  - key: evening
+    time: "Evening"
+    options: ["Roasted chana with jaggery (small)", "Dates (2) + nuts", "Sprouts chaat with lemon"]
+  - key: dinner
+    time: "Dinner"
+    options: ["Methi thepla + curd", "Egg curry + vegetables", "Dal + green leafy sabzi + phulka"]
+include_avoid:
+  include: ["Green leafy vegetables, ragi, bajra", "Dal, chana, rajma, soya", "Eggs, fish, chicken, mutton", "Vitamin C with meals — lemon, amla, guava, orange"]
+  avoid: ["Tea/coffee within 1 hour of meals", "Calcium tablets or milk with iron-rich meals", "Excess bran"]
+closing_bullets:
+  - "Cooking in an iron kadhai adds iron to food."

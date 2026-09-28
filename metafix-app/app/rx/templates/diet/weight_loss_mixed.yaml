@@ -1,0 +1,33 @@
+id: weight_loss_mixed
+version: "1.0"
+title: "DIET PLAN — WEIGHT MANAGEMENT"
+target: { kcal: "1400–1600 kcal/day", protein: "1.0–1.2 g/kg ideal body weight", salt: "under 5 g/day (1 teaspoon)" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["1 glass warm water", "Soaked methi seeds water", "Lemon water, no sugar"]
+  - key: breakfast
+    time: "Breakfast (8–9 am)"
+    options: ["2 egg-white omelette + 1 multigrain toast", "Moong dal chilla (2) with mint chutney", "Vegetable poha (1 bowl) + 1 boiled egg", "Besan chilla (2) + curd"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 fruit (guava, apple, pear, orange)", "Buttermilk (1 glass)", "10–12 almonds or walnuts"]
+  - key: lunch
+    time: "Lunch (1–2 pm)"
+    options: ["2 phulka + dal + sabzi + salad", "1 bowl brown rice + chicken/fish curry + salad", "Jowar/bajra bhakri (1) + dal + sabzi + curd"]
+  - key: evening
+    time: "Evening (5 pm)"
+    options: ["Roasted chana (a handful) + green tea", "Sprouts chaat", "Paneer tikka (4–5 pieces)"]
+  - key: dinner
+    time: "Dinner (by 8 pm)"
+    options: ["Grilled chicken / fish + sautéed vegetables", "1 phulka + dal + large salad", "Paneer bhurji + vegetable soup"]
+include_avoid:
+  include: ["Vegetables — half the plate", "Dal, pulses, sprouts", "Eggs, chicken, fish", "Curd, paneer, buttermilk", "Whole fruits (1–2 a day)"]
+  avoid: ["Sugar, jaggery, sweets", "Fruit juices, soft drinks", "Maida — bread, biscuits, bakery", "Fried snacks — samosa, vada, farsan", "Red and processed meat"]
+closing_bullets:
+  - "Oil: 3–4 teaspoons per person per day in total."
+  - "Water: 2.5–3 litres a day unless told otherwise."
+  - "Sleep 7–8 hours; late nights increase hunger."
+  - "Weigh yourself once a week, same day and time."
+  - "Do not over-restrict — skipping meals leads to overeating later."

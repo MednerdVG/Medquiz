@@ -1,0 +1,12 @@
+id: fitness_certificate
+version: "1.0"
+title: "CERTIFICATE OF FITNESS"
+strip: "FITNESS"
+summary: Fit to work / travel / attend gym, with any restriction.
+required_fields: [fit_for]
+defaults:
+  restriction: null
+body:
+  - "This is to certify that I have examined <b>{{ patient_name }}</b>{% if age %}, aged {{ age }} years{% endif %}, on {{ consult_date }}."
+  - "{% if conditions %}{{ their|capitalize }} conditions under treatment: {{ conditions|join('; ') }}.{% endif %}"
+  - "In my opinion {{ they }} {{ 'is' if they != 'they' else 'are' }} medically fit to {{ fit_for }}{% if restriction %}, with the following restriction: {{ restriction }}{% endif %}."

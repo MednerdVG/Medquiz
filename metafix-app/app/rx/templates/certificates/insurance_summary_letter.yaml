@@ -1,0 +1,10 @@
+id: insurance_summary_letter
+version: "1.0"
+title: "CLINICAL SUMMARY"
+strip: "FOR INSURANCE"
+summary: Two-page clinical summary for insurers (two_page_clinical preset).
+body:
+  - "To whom it may concern,"
+  - "<b>{{ patient_name }}</b>{% if age %}, aged {{ age }} years{% endif %}{% if patient_id %} (Patient ID {{ patient_id }}){% endif %}, is under the care of <b>{{ doctor_name }}</b> at Metafix Clinic. This summary reflects the consultation of {{ consult_date }}."
+closing:
+  - "This summary is issued at the request of the patient for insurance purposes."

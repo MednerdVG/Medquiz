@@ -1,0 +1,11 @@
+id: hypoglycaemia
+version: "1.0"
+title: "LOW SUGAR (HYPOGLYCAEMIA) — WHAT TO DO"
+style: warn
+intro: "Warning signs: sweating, shaking, sudden hunger, fast heartbeat, confusion or dizziness."
+bullets:
+  - "Check the sugar if you can. Below 70 mg/dL, or symptoms and no meter: take 15 g of fast sugar at once — 3 teaspoons of sugar or glucose in water, or 150 mL of fruit juice."
+  - "Re-check after 15 minutes; repeat if still below 70 mg/dL."
+  - "Once better, eat a proper snack or your next meal."
+  - "Do not drive if your sugar is low or you have just had a low."
+  - "Tell the clinic about every low reading."

@@ -1,0 +1,150 @@
+# Clinic formulary (brief §15) — maintainable by hand.
+#
+# molecules: generic name -> class + marketed strengths (when prescribed by generic name)
+#            + usual schedule (daily | weekly | six_monthly | as_needed | variable)
+# brands:    brand name (without Tab./Cap./Inj.) -> composition, marketed strengths, schedule
+#
+# Strength strings are compared numerically, ignoring units: "25/5" == "25 mg / 5 mg".
+# STARTER DATA — review and extend before clinical use.
+
+molecules:
+  metformin:        { class: biguanide,   strengths: ["250", "500", "850", "1000"], schedule: daily }
+  glimepiride:      { class: sulfonylurea, strengths: ["0.5", "1", "2", "3", "4"], schedule: daily }
+  gliclazide:       { class: sulfonylurea, strengths: ["30", "40", "60", "80"], schedule: daily }
+  glipizide:        { class: sulfonylurea, strengths: ["2.5", "5", "10"], schedule: daily }
+  glibenclamide:    { class: sulfonylurea, strengths: ["2.5", "5"], schedule: daily }
+  sitagliptin:      { class: dpp4, strengths: ["25", "50", "100"], schedule: daily }
+  linagliptin:      { class: dpp4, strengths: ["5"], schedule: daily }
+  vildagliptin:     { class: dpp4, strengths: ["50"], schedule: daily }
+  teneligliptin:    { class: dpp4, strengths: ["20", "40"], schedule: daily }
+  alogliptin:       { class: dpp4, strengths: ["6.25", "12.5", "25"], schedule: daily }
+  empagliflozin:    { class: sglt2, strengths: ["10", "25"], schedule: daily }
+  dapagliflozin:    { class: sglt2, strengths: ["5", "10"], schedule: daily }
+  canagliflozin:    { class: sglt2, strengths: ["100", "300"], schedule: daily }
+  pioglitazone:     { class: tzd, strengths: ["7.5", "15", "30"], schedule: daily }
+  semaglutide:      { class: glp1, strengths: ["0.25", "0.5", "1", "1.7", "2.4", "3", "7", "14"], schedule: weekly,
+                      note: "oral semaglutide (Rybelsus) is daily — see brand" }
+  tirzepatide:      { class: glp1, strengths: ["2.5", "5", "7.5", "10", "12.5", "15"], schedule: weekly }
+  dulaglutide:      { class: glp1, strengths: ["0.75", "1.5"], schedule: weekly }
+  liraglutide:      { class: glp1, strengths: ["0.6", "1.2", "1.8", "3"], schedule: daily }
+  insulin glargine: { class: insulin, schedule: daily }
+  insulin degludec: { class: insulin, schedule: daily }
+  insulin aspart:   { class: insulin, schedule: daily }
+  insulin lispro:   { class: insulin, schedule: daily }
+  insulin icodec:   { class: insulin, schedule: weekly }
+  rosuvastatin:     { class: statin, strengths: ["5", "10", "20", "40"], schedule: daily }
+  atorvastatin:     { class: statin, strengths: ["10", "20", "40", "80"], schedule: daily }
+  pitavastatin:     { class: statin, strengths: ["1", "2", "4"], schedule: daily }
+  ezetimibe:        { class: lipid, strengths: ["10"], schedule: daily }
+  bempedoic acid:   { class: lipid, strengths: ["180"], schedule: daily }
+  inclisiran:       { class: sirna_pcsk9, strengths: ["284"], schedule: six_monthly }
+  fenofibrate:      { class: fibrate, strengths: ["48", "145", "160", "200"], schedule: daily }
+  telmisartan:      { class: arb, strengths: ["20", "40", "80"], schedule: daily }
+  olmesartan:       { class: arb, strengths: ["10", "20", "40"], schedule: daily }
+  chlorthalidone:   { class: diuretic, strengths: ["6.25", "12.5", "25"], schedule: daily }
+  amlodipine:       { class: ccb, strengths: ["2.5", "5", "10"], schedule: daily }
+  s-amlodipine:     { class: ccb, strengths: ["1.25", "2.5", "5"], schedule: daily }
+  cilnidipine:      { class: ccb, strengths: ["5", "10", "20"], schedule: daily }
+  propranolol:      { class: beta_blocker, strengths: ["10", "20", "40", "80"], schedule: daily }
+  metoprolol:       { class: beta_blocker, strengths: ["12.5", "25", "50", "100"], schedule: daily }
+  levothyroxine:    { class: thyroid, unit: mcg,
+                      strengths: ["12.5", "25", "37.5", "50", "62.5", "75", "88", "100", "112", "125", "137", "150", "175", "200"],
+                      schedule: daily }
+  vonoprazan:       { class: pcab, strengths: ["10", "20"], schedule: daily }
+  pantoprazole:     { class: ppi, strengths: ["20", "40"], schedule: daily }
+  rabeprazole:      { class: ppi, strengths: ["10", "20"], schedule: daily }
+  esomeprazole:     { class: ppi, strengths: ["20", "40"], schedule: daily }
+  domperidone:      { class: prokinetic, strengths: ["10", "30"], schedule: daily }
+  montelukast:      { class: lta, strengths: ["4", "5", "10"], schedule: daily }
+  levocetirizine:   { class: antihistamine, strengths: ["2.5", "5"], schedule: daily }
+  alprazolam:       { class: benzodiazepine, strengths: ["0.25", "0.5", "1"], schedule: daily }
+  clonazepam:       { class: benzodiazepine, strengths: ["0.25", "0.5", "1", "2"], schedule: daily }
+  lorazepam:        { class: benzodiazepine, strengths: ["1", "2"], schedule: daily }
+  etizolam:         { class: benzodiazepine, strengths: ["0.25", "0.5", "1"], schedule: daily }
+  zolpidem:         { class: z_drug, strengths: ["5", "6.25", "10", "12.5"], schedule: daily }
+  paracetamol:      { class: analgesic, strengths: ["500", "650", "1000"], schedule: as_needed }
+  ibuprofen:        { class: nsaid, strengths: ["200", "400", "600"], schedule: as_needed }
+  diclofenac:       { class: nsaid, strengths: ["50", "75", "100"], schedule: as_needed }
+  aceclofenac:      { class: nsaid, strengths: ["100", "200"], schedule: as_needed }
+  etoricoxib:       { class: nsaid, strengths: ["60", "90", "120"], schedule: as_needed }
+  naproxen:         { class: nsaid, strengths: ["250", "500"], schedule: as_needed }
+  ferric carboxymaltose: { class: iron, strengths: ["500", "1000"], schedule: variable }
+  ferrous ascorbate: { class: iron, strengths: ["100"], schedule: daily }
+  cholecalciferol:  { class: vitamin, strengths: ["1000", "2000", "60000"], schedule: variable }
+  methylcobalamin:  { class: vitamin, strengths: ["500", "1500"], schedule: daily }
+  aspirin:          { class: antiplatelet, strengths: ["75", "150"], schedule: daily }
+  clopidogrel:      { class: antiplatelet, strengths: ["75"], schedule: daily }
+
+brands:
+  # diabetes
+  Glycomet:        { molecules: [metformin], strengths: ["250", "500", "850", "1000"] }
+  Glycomet SR:     { molecules: [metformin], strengths: ["500", "850", "1000"] }
+  Glycomet GP:     { molecules: [glimepiride, metformin], strengths: ["0.5", "1", "2", "3", "4"], note: "GP n = glimepiride n + metformin 500" }
+  Gemer:           { molecules: [glimepiride, metformin], strengths: ["1", "2", "3", "4"] }
+  Amaryl:          { molecules: [glimepiride], strengths: ["1", "2", "3", "4"] }
+  Januvia:         { molecules: [sitagliptin], strengths: ["25", "50", "100"] }
+  Istamet:         { molecules: [sitagliptin, metformin], strengths: ["50/500", "50/1000"] }
+  Trajenta:        { molecules: [linagliptin], strengths: ["5"] }
+  Alsita:          { molecules: [alogliptin], strengths: ["12.5", "25"] }
+  Alsita-M:        { molecules: [alogliptin, metformin], strengths: ["12.5/500", "12.5/1000"] }
+  Jardiance:       { molecules: [empagliflozin], strengths: ["10", "25"] }
+  Forxiga:         { molecules: [dapagliflozin], strengths: ["5", "10"] }
+  Xilingio:        { molecules: [empagliflozin, linagliptin], strengths: ["10/5", "25/5"] }
+  Mounjaro:        { molecules: [tirzepatide], strengths: ["2.5", "5", "7.5", "10", "12.5", "15"], schedule: weekly }
+  Ozempic:         { molecules: [semaglutide], strengths: ["0.25", "0.5", "1"], schedule: weekly }
+  Wegovy:          { molecules: [semaglutide], strengths: ["0.25", "0.5", "1", "1.7", "2.4"], schedule: weekly }
+  Rybelsus:        { molecules: [semaglutide], strengths: ["3", "7", "14"], schedule: daily }
+  Trulicity:       { molecules: [dulaglutide], strengths: ["0.75", "1.5"], schedule: weekly }
+  Awiqli:          { molecules: [insulin icodec], schedule: weekly }
+  Tresiba:         { molecules: [insulin degludec], schedule: daily }
+  Basalog:         { molecules: [insulin glargine], schedule: daily }
+  Lantus:          { molecules: [insulin glargine], schedule: daily }
+  Novorapid:       { molecules: [insulin aspart], schedule: daily }
+  # lipids
+  Rosuvas:         { molecules: [rosuvastatin], strengths: ["5", "10", "20", "40"] }
+  Rozavel:         { molecules: [rosuvastatin], strengths: ["5", "10", "20", "40"] }
+  Atorva:          { molecules: [atorvastatin], strengths: ["10", "20", "40", "80"] }
+  Sybrava:         { molecules: [inclisiran], strengths: ["284"], schedule: six_monthly }
+  Ezedoc:          { molecules: [ezetimibe], strengths: ["10"] }
+  # blood pressure
+  Telma:           { molecules: [telmisartan], strengths: ["20", "40", "80"] }
+  Eritel:          { molecules: [telmisartan], strengths: ["20", "40", "80"] }
+  Eritel CH:       { molecules: [telmisartan, chlorthalidone], strengths: ["40/6.25", "40/12.5", "80/12.5"] }
+  Telma CT:        { molecules: [telmisartan, chlorthalidone], strengths: ["40/6.25", "40/12.5", "80/12.5"] }
+  Amlong:          { molecules: [amlodipine], strengths: ["2.5", "5", "10"] }
+  S-Numlo:         { molecules: [s-amlodipine], strengths: ["1.25", "2.5", "5"] }
+  Ciplar:          { molecules: [propranolol], strengths: ["10", "40"] }
+  Ciplar LA:       { molecules: [propranolol], strengths: ["20", "40", "80"] }
+  # thyroid
+  Thyronorm:       { molecules: [levothyroxine], unit: mcg,
+                     strengths: ["12.5", "25", "37.5", "50", "62.5", "75", "88", "100", "112", "125", "137", "150"] }
+  Eltroxin:        { molecules: [levothyroxine], unit: mcg, strengths: ["25", "50", "75", "100"] }
+  # gut
+  Pan:             { molecules: [pantoprazole], strengths: ["20", "40"] }
+  Pan-D:           { molecules: [pantoprazole, domperidone], strengths: ["40/30"] }
+  Razo:            { molecules: [rabeprazole], strengths: ["10", "20"] }
+  Voniza:          { molecules: [vonoprazan], strengths: ["10", "20"] }
+  # respiratory / allergy
+  Montair:         { molecules: [montelukast], strengths: ["4", "5", "10"] }
+  Montair LC:      { molecules: [montelukast, levocetirizine], strengths: ["10/5"] }
+  Montair LC Kid:  { molecules: [montelukast, levocetirizine], strengths: ["4/2.5"] }
+  # CNS
+  Restyl:          { molecules: [alprazolam], strengths: ["0.25", "0.5", "1"] }
+  Rivotril:        { molecules: [clonazepam], strengths: ["0.25", "0.5", "2"] }
+  Zolfresh:        { molecules: [zolpidem], strengths: ["5", "10"] }
+  Stilnoct:        { molecules: [zolpidem], strengths: ["5", "10"] }
+  # analgesics
+  Lanol ER:        { molecules: [paracetamol], strengths: ["650"], schedule: as_needed }
+  Dolo:            { molecules: [paracetamol], strengths: ["500", "650"], schedule: as_needed }
+  Brufen:          { molecules: [ibuprofen], strengths: ["200", "400", "600"], schedule: as_needed }
+  Voveran:         { molecules: [diclofenac], strengths: ["50", "100"], schedule: as_needed }
+  Zerodol:         { molecules: [aceclofenac], strengths: ["100"], schedule: as_needed }
+  Etoshine:        { molecules: [etoricoxib], strengths: ["60", "90", "120"], schedule: as_needed }
+  # iron / vitamins
+  Ferinject:       { molecules: [ferric carboxymaltose], strengths: ["500", "1000"], schedule: variable }
+  Orofer FCM:      { molecules: [ferric carboxymaltose], strengths: ["500", "1000"], schedule: variable }
+  Orofer XT:       { molecules: [ferrous ascorbate], strengths: [] }
+  Uprise D3:       { molecules: [cholecalciferol], strengths: ["1000", "60000"], schedule: variable }
+  # antiplatelets
+  Ecosprin:        { molecules: [aspirin], strengths: ["75", "150"] }
+  Clopitab:        { molecules: [clopidogrel], strengths: ["75"] }

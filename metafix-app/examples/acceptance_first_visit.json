@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "consultation_id": "c2f6a3e4-0000-4000-8000-000000000005",
+    "consult_date": "2026-09-28",
+    "consult_type": "in_clinic",
+    "visit_number": 1,
+    "seen_by": "shubham_ahirrao",
+    "section_order_preset": "standard"
+  },
+  "patient": {
+    "name": "Mr. Rohan Mehta",
+    "age_years": 44,
+    "sex": "M",
+    "patient_id": "MFX-00412",
+    "diet_type": "vegetarian",
+    "allergies": ["nil known"],
+    "known_conditions": ["Type 2 diabetes 2 years", "Fatty liver"]
+  },
+  "vitals": {
+    "weight_kg": 92.4,
+    "height_cm": 172,
+    "strip": [
+      { "label": "WEIGHT", "value": "92.4 kg" },
+      { "label": "WAIST", "value": "104 cm" },
+      { "label": "BP", "value": "138/88 mmHg" },
+      { "label": "HbA1c", "value": "7.9 %" }
+    ]
+  },
+  "complaints": [ { "text": "Weight gain" }, { "text": "Tiredness after meals" } ],
+  "diagnoses": [ { "text": "Type 2 diabetes mellitus" }, { "text": "Obesity class II" }, { "text": "Fatty liver (grade II)" } ],
+  "labs": [
+    { "test": "HbA1c", "value": "7.9 %", "remark": "Target under 7", "highlight": true },
+    { "test": "ALT", "value": "68 U/L", "remark": "Raised", "highlight": true }
+  ],
+  "investigations": [ { "name": "HbA1c", "instruction": "No fasting needed" }, { "name": "Lipid profile", "instruction": "12 hours fasting" } ],
+  "medications": {
+    "started": [
+      { "name": "Inj. Mounjaro 2.5 mg", "generic": "tirzepatide", "dose": "once a week", "timing": "every Monday", "duration": "4 weeks", "note": "Then 5 mg weekly" },
+      { "name": "Tab. Jardiance 10", "generic": "empagliflozin", "dose": "1–0–0", "timing": "after breakfast", "duration": "3 months" }
+    ],
+    "continued": [
+      { "name": "Tab. Glycomet SR 500", "generic": "metformin", "dose": "1–0–1", "timing": "with meals", "purpose": "Sugar" },
+      { "name": "Tab. Telma 40", "generic": "telmisartan", "dose": "1–0–0", "purpose": "Blood pressure" }
+    ],
+    "nutrition": [ { "name": "Whey protein", "dose": "1 scoop in 200 mL water", "timing": "1–0–0" } ]
+  },
+  "diet_plan": { "template": "weight_loss_vegetarian" },
+  "exercise_plan": { "template": "strength_cardio_stepup" },
+  "advice_blocks": ["glp1_weekly", "sick_day_rules"],
+  "charts": ["weight_log_4week"],
+  "follow_up": { "interval": "4 weeks", "bring": ["weight log"], "report_sooner_if": ["persistent vomiting"] }
+}

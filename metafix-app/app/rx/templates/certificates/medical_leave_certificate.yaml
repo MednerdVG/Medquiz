@@ -1,0 +1,11 @@
+id: medical_leave_certificate
+version: "1.0"
+title: "MEDICAL CERTIFICATE"
+strip: "MEDICAL LEAVE"
+summary: Dates of advised rest.
+required_fields: [rest_from, rest_to]
+defaults:
+  resume_on: null
+body:
+  - "This is to certify that <b>{{ patient_name }}</b>{% if age %}, aged {{ age }} years{% endif %}, was examined by me on {{ consult_date }}{% if conditions %} and is under treatment for {{ conditions|join('; ') }}{% endif %}."
+  - "{{ they|capitalize }} {{ 'was' if they != 'they' else 'were' }} advised rest from <b>{{ rest_from }}</b> to <b>{{ rest_to }}</b>{% if resume_on %} and may resume normal duties on {{ resume_on }}{% endif %}."

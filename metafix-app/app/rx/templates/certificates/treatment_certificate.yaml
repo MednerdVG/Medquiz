@@ -1,0 +1,13 @@
+id: treatment_certificate
+version: "1.0"
+title: "MEDICAL CERTIFICATE"
+strip: "TREATMENT"
+summary: Under the medical treatment of the treating doctor, with conditions and period.
+required_fields: [treatment_period]
+defaults:
+  fitness: "fit to carry on with normal day-to-day activity"
+body:
+  - "This is to certify that <b>{{ patient_name }}</b>{% if age %}, aged {{ age }} years{% endif %}{% if patient_id %} (Patient ID {{ patient_id }}){% endif %}, is under the medical treatment of <b>{{ doctor_name }}</b> at Metafix Clinic."
+  - "{% if conditions %}{{ their|capitalize }} conditions under treatment: {{ conditions|join('; ') }}.{% endif %}"
+  - "Period of treatment: {{ treatment_period }}."
+  - "In my opinion {{ they }} {{ 'is' if they != 'they' else 'are' }} {{ fitness }}."

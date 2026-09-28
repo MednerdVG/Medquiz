@@ -1,0 +1,12 @@
+id: home_bp_7day
+version: "1.0"
+title: "HOME BLOOD PRESSURE — 7-DAY LOG"
+row_header: "Day"
+rows: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"]
+columns: ["Morning — reading 1", "Morning — reading 2", "Evening — reading 1", "Evening — reading 2", "Pulse"]
+target: "below 130/80 mmHg at home"
+instructions:
+  - "Sit quietly for 5 minutes, back supported, feet flat, arm resting at heart level."
+  - "No tea, coffee, smoking or exercise in the 30 minutes before measuring."
+  - "Take two readings 1 minute apart, morning before medicines and evening before dinner."
+  - "Bring this sheet (or a photo of it) to your next visit."

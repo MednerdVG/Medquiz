@@ -1,0 +1,17 @@
+id: chair_based_low_impact
+version: "1.0"
+title: "EXERCISE PLAN — CHAIR-BASED, LOW IMPACT"
+intro: "Gentle daily movement you can do seated or holding a chair."
+weekly:
+  - { day: "Mon, Wed, Fri", activity: "Seated marching, sit-to-stand from chair, seated band rows, ankle pumps", duration: "15–20 min" }
+  - { day: "Tue, Thu, Sat", activity: "Indoor walking in short bouts + seated stretches", duration: "3 × 10 min" }
+  - { day: "Sun", activity: "Rest; deep breathing", duration: "10 min" }
+progression:
+  title: "PROGRESSION"
+  columns: ["Weeks 1–2", "Weeks 3–6", "Weeks 7–12"]
+  rows:
+    - { label: "Sit-to-stand", values: ["5 × 2 sets", "8 × 2 sets", "10 × 3 sets"] }
+    - { label: "Walking bouts", values: ["3 × 5 min", "3 × 10 min", "2 × 15 min"] }
+precautions:
+  - "Use a sturdy chair without wheels, placed against a wall."
+  - "Keep a support nearby when standing; stop if you feel light-headed."

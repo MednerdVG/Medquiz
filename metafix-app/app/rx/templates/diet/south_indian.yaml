@@ -1,0 +1,30 @@
+id: south_indian
+version: "1.0"
+title: "DIET PLAN — SOUTH INDIAN HOUSEHOLD"
+target: { kcal: "1500–1700 kcal/day", protein: "60–70 g/day", salt: "under 5 g/day" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water; filter coffee without sugar (small)", "Soaked methi seeds water"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Idli (2) + sambar (large bowl) + chutney", "Pesarattu (2) + chutney", "Ragi dosa (2) + sambar", "Vegetable upma + 1 egg"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 fruit", "Majjige (buttermilk)", "Sundal (small bowl)"]
+  - key: lunch
+    time: "Lunch"
+    options: ["Rice (½–¾ bowl) + sambar + poriyal + curd", "Millet rice + rasam + kootu + fish curry", "2 chapati + dal + poriyal"]
+  - key: evening
+    time: "Evening"
+    options: ["Sundal", "Roasted chana", "Coffee without sugar + a few nuts"]
+  - key: dinner
+    time: "Dinner"
+    options: ["Ragi mudde (small) + keerai + dal", "Adai (1–2) + avial", "Grilled fish/chicken + vegetables"]
+include_avoid:
+  include: ["Sambar, rasam, kootu with plenty of vegetables", "Ragi, millets", "Sundal, dal", "Curd, buttermilk"]
+  avoid: ["Large rice portions", "Murukku, chips, bajji, vada", "Payasam, sweets", "Coconut in large amounts"]
+closing_bullets:
+  - "Fill half the plate with vegetables before rice."
+  - "Oil: 3–4 teaspoons per day."

@@ -1,0 +1,10 @@
+id: sugar_log_2x_week
+version: "1.0"
+title: "BLOOD SUGAR LOG — TWICE A WEEK"
+row_header: "Week"
+rows: ["Week 1 — day A", "Week 1 — day B", "Week 2 — day A", "Week 2 — day B", "Week 3 — day A", "Week 3 — day B", "Week 4 — day A", "Week 4 — day B"]
+columns: ["Date", "Fasting", "2 h after breakfast", "2 h after lunch", "2 h after dinner"]
+target: "fasting 80–130 mg/dL · 2 hours after meals under 180 mg/dL"
+instructions:
+  - "Check on two fixed days each week (for example Monday and Thursday)."
+  - "Count 2 hours from the first bite of the meal."

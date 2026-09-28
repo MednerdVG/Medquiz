@@ -1,0 +1,10 @@
+id: weight_log_4week
+version: "1.0"
+title: "WEIGHT LOG — 4 WEEKS"
+row_header: "Week"
+rows: ["Week 1", "Week 2", "Week 3", "Week 4"]
+columns: ["Date", "Weight (kg)", "Waist (cm)", "Notes"]
+target: "steady loss of 0.5–1 kg a week"
+instructions:
+  - "Weigh once a week, same day, on waking, after passing urine, before breakfast."
+  - "Measure the waist at the level of the navel, breathing out normally."

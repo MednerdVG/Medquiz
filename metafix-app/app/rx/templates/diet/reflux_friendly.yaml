@@ -1,0 +1,30 @@
+id: reflux_friendly
+version: "1.0"
+title: "DIET PLAN — REFLUX FRIENDLY"
+target: { kcal: "as per usual diet", other: "small meals; last meal 3 hours before bed" }
+meal_pattern: "5 small meals"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Plain water — no tea or coffee on an empty stomach"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Idli (2) + coconut chutney", "Oats with milk", "Vegetable daliya"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["Banana / papaya / apple", "Buttermilk (not sour)"]
+  - key: lunch
+    time: "Lunch"
+    options: ["2 phulka + lauki/tinda sabzi + dal", "Rice + moong dal + vegetables"]
+  - key: evening
+    time: "Evening"
+    options: ["Roasted makhana", "Fruit"]
+  - key: dinner
+    time: "Dinner (by 7:30 pm)"
+    options: ["Moong dal khichdi + curd", "1 phulka + vegetables + dal"]
+include_avoid:
+  include: ["Bland, home-cooked food", "Non-citrus fruits", "Curd, buttermilk"]
+  avoid: ["Tea/coffee in excess, carbonated drinks", "Very spicy, fried or oily food", "Tomato-heavy gravies, citrus juices", "Chocolate, mint, alcohol, smoking"]
+closing_bullets:
+  - "Do not lie down for 3 hours after meals."
+  - "Chew well and eat slowly."

@@ -1,0 +1,16 @@
+id: gentle_anaemia_correcting
+version: "1.0"
+title: "EXERCISE PLAN — GENTLE, WHILE ANAEMIA IS CORRECTED"
+intro: "Keep moving gently while the blood count recovers; increase only as energy returns."
+weekly:
+  - { day: "Daily", activity: "Easy walking at a conversational pace", duration: "10–20 min" }
+  - { day: "3 days/week", activity: "Light stretching and breathing exercises", duration: "10 min" }
+progression:
+  title: "PROGRESSION"
+  columns: ["Weeks 1–2", "Weeks 3–6", "Weeks 7–12"]
+  rows:
+    - { label: "Walking", values: ["10 min", "20 min", "30 min, brisk if well"] }
+precautions:
+  - "Stop if you feel dizzy, breathless or your heart races; sit down until it settles."
+  - "Rise slowly from lying or sitting."
+  - "Asthma: keep the reliever inhaler with you and warm up slowly."

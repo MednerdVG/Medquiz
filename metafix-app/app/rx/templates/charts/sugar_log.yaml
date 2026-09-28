@@ -1,0 +1,11 @@
+id: sugar_log
+version: "1.0"
+title: "BLOOD SUGAR LOG — DAILY"
+row_header: "Date"
+row_count: 7
+columns: ["Fasting", "Pre-lunch", "Pre-dinner", "Bedtime"]
+target: "fasting 80–130 mg/dL · before meals under 140 mg/dL · bedtime 100–180 mg/dL"
+instructions:
+  - "Wash and dry your hands before pricking; use the side of the fingertip."
+  - "Fasting = on waking, before any food or tea."
+  - "Note any reading under 70 mg/dL and what you did about it."

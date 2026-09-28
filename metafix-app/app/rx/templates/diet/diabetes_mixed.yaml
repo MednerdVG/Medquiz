@@ -1,0 +1,35 @@
+id: diabetes_mixed
+version: "1.0"
+title: "DIET PLAN — DIABETES"
+target: { kcal: "1600–1800 kcal/day", protein: "1.0 g/kg body weight", salt: "under 5 g/day", other: "carbohydrate spread evenly across meals" }
+meal_pattern: "3 meals + 2 small snacks, at fixed times"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water; tea without sugar", "Soaked methi seeds water"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["2 eggs (any style) + 1 multigrain toast + vegetables", "Moong dal chilla (2) + chutney", "Vegetable oats upma + curd", "Idli (2) + sambar (large bowl)"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 guava / apple / pear", "Buttermilk", "Handful of nuts"]
+  - key: lunch
+    time: "Lunch"
+    options: ["2 phulka + dal + sabzi + salad", "Rice (½ bowl) + fish/chicken curry + salad", "Jowar bhakri + dal + sabzi"]
+  - key: evening
+    time: "Evening"
+    options: ["Roasted chana", "Sprouts", "Paneer tikka"]
+  - key: dinner
+    time: "Dinner"
+    options: ["1–2 phulka + sabzi + dal", "Grilled fish/chicken + vegetables", "Paneer + vegetable soup"]
+include_avoid:
+  include: ["Salad before each meal", "Whole grains — jowar, bajra, ragi, oats", "Dal, eggs, fish, chicken, paneer", "Low-sugar fruits in whole form"]
+  avoid: ["Sugar, honey, jaggery, sweets", "Mango, chikoo, grapes, banana in excess", "White rice in large portions, maida", "Fruit juice, cold drinks"]
+simple_swaps:
+  - { replace: "White rice (full plate)", with: "½ bowl rice + extra dal and vegetables" }
+  - { replace: "Biscuits with tea", with: "Roasted chana or a few nuts" }
+  - { replace: "Fruit juice", with: "The whole fruit" }
+closing_bullets:
+  - "Eat at the same times every day; do not skip meals on sugar-lowering medicines."
+  - "Walk 10–15 minutes after the two main meals."
+  - "Oil: 3–4 teaspoons per day; water 2.5–3 litres."

@@ -1,0 +1,60 @@
+# Doctors registry (brief §14).
+# Degrees print EXACTLY as given — never expanded, abbreviated or "corrected".
+# sign_style: typed  -> printed name block, no image
+#             image  -> transparent PNG signature (max height 13 mm), then name block
+# letterhead_degrees / letterhead_specialty are optional: when absent the letterhead
+# prints sign_sub[0] as given and no specialty line (nothing is invented).
+
+vishal_gabale:
+  letterhead_name: "Dr. Vishal Gabale"
+  letterhead_degrees: "MBBS · DNB (MEDICINE)"
+  letterhead_specialty: "Internal Medicine · Metabolic Health Specialist"
+  legal_name: "Dr. Vishal Raghunath Gabale"
+  sign_style: typed
+  sign_name: "Dr. Vishal Gabale"
+  sign_sub:
+    - "MBBS · DNB (Medicine)"
+    - "Consultant Physician & Metabolic Health Specialist"
+    - "Metafix Clinic, South Mumbai"
+  registration_no: null
+  email: "vishal@metafix.clinic"
+  role: owner
+
+shubham_ahirrao:
+  letterhead_name: "Dr. Shubham Ahirrao"
+  legal_name: "Dr. Shubham Ahirrao"
+  sign_style: image
+  signature_png: "assets/sig_shubham.png"
+  sign_name: "Dr. Shubham Ahirrao"
+  sign_sub:
+    - "MBBS · MD (Medicine) · DM (Endocrinology)"
+    - "Metafix Clinic, South Mumbai"
+  registration_no: null
+  email: "shubham@metafix.clinic"
+  role: doctor
+
+adwait_mastud:
+  letterhead_name: "Dr. Adwait Mastud"
+  legal_name: "Dr. Adwait Mastud"
+  sign_style: image
+  signature_png: "assets/sig_adwait_mastud.png"
+  sign_name: "Dr. Adwait Mastud"
+  sign_sub:
+    - "MBBS · ACOM · ACPD"
+    - "Metafix Clinic, South Mumbai"
+  registration_no: null
+  email: "adwait@metafix.clinic"
+  role: doctor
+
+aayush_gangwal:
+  letterhead_name: "Dr. Aayush Gangwal"
+  legal_name: "Dr. Aayush Gangwal"
+  sign_style: image
+  signature_png: "assets/sig_aayush_gangwal.png"
+  sign_name: "Dr. Aayush Gangwal"
+  sign_sub:
+    - "MBBS · DNB (Medicine) · CPCDM"
+    - "Metafix Clinic, South Mumbai"
+  registration_no: null
+  email: "aayush@metafix.clinic"
+  role: doctor

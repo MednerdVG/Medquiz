@@ -1,0 +1,31 @@
+id: weight_loss_vegetarian
+version: "1.0"
+title: "DIET PLAN — WEIGHT MANAGEMENT (VEGETARIAN)"
+target: { kcal: "1400–1600 kcal/day", protein: "60–70 g/day from dal, paneer, curd, soya", salt: "under 5 g/day" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["1 glass warm water", "Soaked almonds (5)"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Moong dal chilla (2) + curd", "Vegetable upma with sprouts (1 bowl)", "Paneer stuffed besan chilla (2)", "Oats with milk and seeds (no sugar)"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 fruit", "Buttermilk", "Roasted makhana (1 cup)"]
+  - key: lunch
+    time: "Lunch"
+    options: ["2 phulka + dal + sabzi + salad + curd", "Rajma/chole (1 bowl) + 1 phulka + salad", "Millet khichdi + curd + salad"]
+  - key: evening
+    time: "Evening"
+    options: ["Sprouts chaat", "Soya chunks salad", "Paneer cubes (50 g) + green tea"]
+  - key: dinner
+    time: "Dinner"
+    options: ["Tofu/paneer + vegetables + 1 phulka", "Dal soup + large salad", "Vegetable daliya (1 bowl)"]
+include_avoid:
+  include: ["Paneer, tofu, soya, curd", "Dal, chana, rajma, sprouts", "Green leafy vegetables", "Seeds — flax, chia, pumpkin"]
+  avoid: ["Sweets, sugar, jaggery", "Fried farsan, namkeen", "Bakery items", "Juices, sweetened drinks"]
+closing_bullets:
+  - "Oil: 3–4 teaspoons per day in total."
+  - "Include a protein source at every meal."
+  - "Weigh once a week; do not over-restrict."

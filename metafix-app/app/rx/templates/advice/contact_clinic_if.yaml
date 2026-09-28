@@ -1,0 +1,9 @@
+id: contact_clinic_if
+version: "1.0"
+title: "CONTACT THE CLINIC IF"
+style: warn
+bullets:
+  - "Sugar below 70 mg/dL more than once, or above 300 mg/dL."
+  - "Chest pain, breathlessness, fainting or palpitations — go to the nearest emergency department first."
+  - "Severe stomach pain, repeated vomiting, or you cannot keep fluids down."
+  - "Rash, swelling of the face or lips after a new medicine."

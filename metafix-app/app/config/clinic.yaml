@@ -1,0 +1,37 @@
+# Clinic constants — live here, never inside template text (brief §12).
+name: "Metafix Clinic"
+tagline: "Reverse the metabolic clock"
+member_bar: "Diabetes · Obesity · Thyroid · Hypertension · Cholesterol · Fatty liver · PCOS"
+address: "Metafix Clinic, South Mumbai, Maharashtra, India"
+phone: "+91 00000 00000"
+email: "care@metafix.clinic"
+website: "metafix.clinic"
+handles: "@metafixclinic"
+place: "Mumbai"
+timezone: "Asia/Kolkata"
+
+# Auto-inserted into glp1_weekly whenever tirzepatide or semaglutide is prescribed.
+supply_contacts:
+  glp1:
+    label: "For Mounjaro supply"
+    name: "Poonam"
+    number: "9920498280"
+
+coordinator_contact:
+  label: "For appointments and queries"
+  name: "Clinic coordinator"
+  number: null
+
+# Teleconsultation consent text shown on the intake page (stored verbatim with each consent).
+consent_version: "tpg-2020-v1"
+consent_text: >-
+  I consent to a teleconsultation with a registered medical practitioner of Metafix Clinic
+  over video or audio. I understand that a teleconsultation has limits compared with an
+  in-person examination, that the doctor may ask me to visit in person or get tests done,
+  and that my information will be used only for my care and kept confidential as required
+  by the Telemedicine Practice Guidelines 2020 and the Digital Personal Data Protection Act 2023.
+
+intake_purpose: >-
+  We collect this information only to prepare for and conduct your consultation, write your
+  prescription and keep your medical record. It is shared with no one outside the clinic
+  except the services we use to send you messages and store your files.

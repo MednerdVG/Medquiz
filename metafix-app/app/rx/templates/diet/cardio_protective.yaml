@@ -1,0 +1,29 @@
+id: cardio_protective
+version: "1.0"
+title: "DIET PLAN — HEART PROTECTIVE"
+target: { kcal: "1500–1800 kcal/day", protein: "1.0 g/kg", salt: "under 5 g/day", other: "saturated fat under 7% of energy" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water; 5 soaked almonds or 2 walnuts"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Oats (unsweetened) with milk and flaxseed", "Moong dal chilla (2) + chutney", "2 egg whites + 1 multigrain toast + vegetables"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 fruit", "Buttermilk"]
+  - key: lunch
+    time: "Lunch"
+    options: ["2 phulka + dal + sabzi + salad", "Fish curry (low oil) + rice (½ bowl) + salad", "Millet khichdi + curd + salad"]
+  - key: evening
+    time: "Evening"
+    options: ["Roasted chana", "Green tea + a few nuts"]
+  - key: dinner
+    time: "Dinner"
+    options: ["Grilled fish / chicken + vegetables", "Dal + sabzi + 1 phulka", "Vegetable soup + paneer (low fat)"]
+include_avoid:
+  include: ["Fish twice a week", "Oats, barley, millets", "Nuts and seeds in small amounts", "Vegetables and fruits — 5 servings a day"]
+  avoid: ["Ghee, butter, vanaspati, cream", "Red meat, organ meat, processed meat", "Salty snacks, pickles, papad", "Bakery and fried food"]
+closing_bullets:
+  - "Oil: 3–4 teaspoons a day, rotate mustard, groundnut and rice-bran oils."

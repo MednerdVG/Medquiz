@@ -1,0 +1,11 @@
+id: hip_safe_pre_MRI
+version: "1.0"
+title: "EXERCISE PLAN — HIP SAFE (UNTIL THE MRI)"
+intro: "Until the MRI is reviewed, keep to movements that do not load or twist the hip."
+weekly:
+  - { day: "Daily", activity: "Upper-body band exercises, seated core bracing, ankle pumps", duration: "15 min" }
+  - { day: "Alternate days", activity: "Stationary cycling with a high seat, no resistance, or pool walking", duration: "15–20 min" }
+precautions:
+  - "No running, jumping, deep squats, cross-legged sitting or twisting on the affected side."
+  - "Stop any exercise that increases groin or hip pain."
+  - "Sciatica: avoid forward bending with straight knees and heavy lifting."

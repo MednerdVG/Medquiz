@@ -1,0 +1,30 @@
+id: renal_protective
+version: "1.0"
+title: "DIET PLAN — WEIGHT MANAGEMENT WITH KIDNEY PROTECTION"
+target: { kcal: "1500–1700 kcal/day", protein: "0.8 g/kg body weight — do not exceed", salt: "under 5 g/day — strictly", other: "fluids as advised" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water (within the advised fluid amount)"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Vegetable poha/upma (1 bowl)", "2 idli + chutney (not sambar-heavy)", "1 egg white + 1 toast + vegetables"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["Apple / pear / papaya (small)", "Puffed rice (1 cup)"]
+  - key: lunch
+    time: "Lunch"
+    options: ["2 phulka + sabzi (leached) + thin dal (½ bowl) + salad", "Rice (½ bowl) + chicken/fish (small, 60 g) + vegetables"]
+  - key: evening
+    time: "Evening"
+    options: ["Tea (less milk) + 2 marie biscuits", "Roasted makhana (small)"]
+  - key: dinner
+    time: "Dinner"
+    options: ["1–2 phulka + sabzi + curd (small)", "Vegetable soup (homemade, low salt) + 1 phulka"]
+include_avoid:
+  include: ["Low-potassium vegetables — bottle gourd, ridge gourd, cabbage, cauliflower", "Apple, pear, papaya", "Egg white, small portions of fish/chicken"]
+  avoid: ["Added salt, pickles, papad, sauces, packaged food", "Protein powders and high-protein diets", "Coconut water, banana, dry fruits (high potassium)", "Painkillers (NSAIDs) without advice"]
+closing_bullets:
+  - "Leaching: cut vegetables, soak in warm water for 1 hour, discard the water, then cook."
+  - "Use lemon, herbs and spices instead of salt."

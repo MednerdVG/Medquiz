@@ -1,0 +1,30 @@
+id: east_african
+version: "1.0"
+title: "DIET PLAN — EAST AFRICAN HOUSEHOLD"
+target: { kcal: "1500–1700 kcal/day", protein: "70–80 g/day", salt: "under 5 g/day" }
+meal_pattern: "3 meals + 1–2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water; tea without sugar"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["2 eggs + 1 slice brown bread + tomato and onion", "Millet porridge (uji) without sugar + a handful of groundnuts", "Beans (1 small bowl) + 1 egg"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 fruit (orange, pawpaw — small slice, guava)", "Plain yoghurt"]
+  - key: lunch
+    time: "Lunch"
+    options: ["Small portion ugali/posho + sukuma wiki + beans or fish", "Matoke (small) + groundnut sauce + greens", "Brown rice (½ bowl) + chicken stew + vegetables"]
+  - key: evening
+    time: "Evening"
+    options: ["Roasted groundnuts (small handful)", "Boiled egg"]
+  - key: dinner
+    time: "Dinner"
+    options: ["Grilled tilapia + vegetables", "Bean stew + greens", "Chicken + cabbage and carrots"]
+include_avoid:
+  include: ["Greens — sukuma wiki, dodo, cabbage", "Beans, peas, lentils", "Fish, eggs, chicken", "Whole fruits in small portions"]
+  avoid: ["Chapati and mandazi in large amounts", "Chips (fries), samosa", "Sugary tea and soda", "Large starchy portions — keep ugali/matoke to a quarter of the plate"]
+closing_bullets:
+  - "Half the plate vegetables, a quarter protein, a quarter starch."
+  - "Oil: 3–4 teaspoons per day."

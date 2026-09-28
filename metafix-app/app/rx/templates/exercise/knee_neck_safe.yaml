@@ -1,0 +1,19 @@
+id: knee_neck_safe
+version: "1.0"
+title: "EXERCISE PLAN — KNEE AND NECK SAFE"
+weekly:
+  - { day: "Mon, Wed, Fri", activity: "Static quadriceps, straight-leg raise, side-lying leg lift, chin tucks, shoulder blade squeezes", duration: "20 min" }
+  - { day: "Tue, Thu, Sat", activity: "Cycling (stationary) or swimming / water walking", duration: "20–30 min" }
+  - { day: "Sun", activity: "Rest", duration: "" }
+progression:
+  title: "PROGRESSION"
+  columns: ["Weeks 1–2", "Weeks 3–6", "Weeks 7–12"]
+  rows:
+    - { label: "Leg exercises", values: ["10 × 1 set", "10 × 2 sets", "15 × 3 sets, add ankle weight"] }
+    - { label: "Cardio", values: ["15 min", "20–25 min", "30 min"] }
+precautions:
+  - "Avoid deep squats, kneeling, stairs for exercise and running."
+  - "No overhead lifting; keep the neck neutral — no neck circles."
+  - "Mild ache that settles within 2 hours is acceptable; sharp pain is not."
+physiotherapy:
+  - "A physiotherapy assessment is advised to tailor this plan."

@@ -1,0 +1,17 @@
+id: post_cardiac_event
+version: "1.0"
+title: "EXERCISE PLAN — AFTER A HEART EVENT"
+intro: "Build up slowly under your cardiologist's advice. Talk-test pace: you should be able to speak in full sentences."
+weekly:
+  - { day: "Daily", activity: "Flat walking", duration: "10 → 30 min" }
+  - { day: "3 days/week", activity: "Light band exercises for arms and legs (no breath-holding)", duration: "10–15 min" }
+progression:
+  title: "4-STAGE STEP-UP"
+  columns: ["Stage 1", "Stage 2", "Stage 3", "Stage 4"]
+  rows:
+    - { label: "Walking", values: ["5–10 min × 2", "15 min × 2", "30 min", "30–40 min brisk"] }
+    - { label: "Move up when", values: ["no symptoms for 1 week", "no symptoms for 1 week", "no symptoms for 2 weeks", "as cleared at review"] }
+precautions:
+  - "Post-stent: no heavy lifting (over 5 kg) or straining for the period advised by your cardiologist."
+  - "Stop and rest if you get chest discomfort, breathlessness or palpitations; use your SOS tablet if prescribed and seek help if not settled in 5 minutes."
+  - "Avoid exercise in extreme heat or right after meals."

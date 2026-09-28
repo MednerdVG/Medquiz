@@ -1,0 +1,12 @@
+id: anti_inflammatory
+version: "1.0"
+title: "ANTI-INFLAMMATORY FOODS — TO ADD TO THE CURRENT DIET"
+target: {}
+include_avoid:
+  include: ["Fatty fish 2–3 times a week (bangda, rawas, salmon)", "Walnuts, flaxseed, chia seeds", "Turmeric with black pepper in cooking", "Green leafy vegetables and colourful vegetables daily", "Berries, amla, guava, citrus fruits", "Green tea (2 cups)"]
+  avoid: ["Sugar and sweetened drinks", "Deep-fried and repeatedly heated oil", "Processed meat", "Refined flour, bakery", "Alcohol"]
+dos_and_donts:
+  do: ["Cook with mustard, groundnut or olive oil — rotate", "Eat a handful of nuts daily", "Add a salad to lunch and dinner"]
+  dont: ["Reuse frying oil", "Rely on supplements instead of food", "Skip vegetables at dinner"]
+closing_bullets:
+  - "Keep your current meal pattern; add these foods rather than changing everything at once."

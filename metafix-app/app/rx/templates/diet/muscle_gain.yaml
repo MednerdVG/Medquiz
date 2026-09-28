@@ -1,0 +1,31 @@
+id: muscle_gain
+version: "1.0"
+title: "DIET PLAN — MUSCLE BUILDING AND VISCERAL FAT LOSS"
+target: { kcal: "1800–2000 kcal/day", protein: "1.4–1.6 g/kg body weight", salt: "under 5 g/day" }
+meal_pattern: "6 meals — protein at every meal"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water + soaked almonds (6)"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["3 eggs (1 yolk) + 2 multigrain toast + vegetables", "Paneer bhurji (100 g) + 2 phulka", "Oats with milk + whey (1 scoop) + seeds"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["Greek yoghurt / hung curd (1 cup) + fruit", "Sprouts salad"]
+  - key: lunch
+    time: "Lunch"
+    options: ["Chicken/fish (150 g) + 2 phulka + salad", "Dal + paneer sabzi + rice (½ bowl) + salad", "Rajma (1 bowl) + rice (½ bowl) + curd"]
+  - key: evening
+    time: "Evening / post-workout"
+    options: ["Whey protein (1 scoop) in water", "Boiled eggs (2) + fruit", "Soya chunks (30 g dry) chaat"]
+  - key: dinner
+    time: "Dinner"
+    options: ["Grilled chicken/fish/tofu + vegetables", "Paneer tikka + salad + 1 phulka", "Egg curry + vegetables"]
+include_avoid:
+  include: ["Eggs, chicken, fish, paneer, tofu, soya", "Curd, milk, whey", "Dal and pulses", "Vegetables at every meal"]
+  avoid: ["Sugar and sweets", "Fried food", "Alcohol", "Refined flour snacks"]
+closing_bullets:
+  - "Spread protein through the day — about 25–35 g per meal."
+  - "Water 3 litres a day."
+  - "Sleep 7–8 hours for recovery."

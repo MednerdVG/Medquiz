@@ -1,0 +1,31 @@
+id: maharashtrian
+version: "1.0"
+title: "DIET PLAN — MAHARASHTRIAN HOUSEHOLD"
+target: { kcal: "1500–1700 kcal/day", protein: "60–70 g/day", salt: "under 5 g/day" }
+meal_pattern: "3 meals + 2 snacks"
+slots:
+  - key: on_waking
+    time: "On waking"
+    options: ["Water; chai without sugar", "Soaked almonds (5)"]
+  - key: breakfast
+    time: "Breakfast"
+    options: ["Kanda poha with peanuts and sprouts (1 bowl)", "Thalipeeth (1) + curd", "Upma with vegetables + 1 boiled egg", "Besan / moong chilla (2)"]
+  - key: mid_morning
+    time: "Mid-morning"
+    options: ["1 fruit", "Taak (buttermilk)", "Roasted chana"]
+  - key: lunch
+    time: "Lunch"
+    options: ["Jowar/bajra bhakri (1) + pithla / usal + bhaji + koshimbir", "2 chapati + varan + bhaji + salad", "Rice (½ bowl) + amti + fish curry + koshimbir"]
+  - key: evening
+    time: "Evening"
+    options: ["Sprouts usal (small bowl)", "Roasted makhana", "Chai without sugar + 2 nuts"]
+  - key: dinner
+    time: "Dinner"
+    options: ["1 bhakri + palebhaji + dal", "Chicken/fish sukka + vegetables", "Moong dal khichdi (1 bowl) + taak"]
+include_avoid:
+  include: ["Jowar, bajra, nachni bhakri", "Usal, pithla, varan", "Green leafy bhaji", "Koshimbir with every meal"]
+  avoid: ["Vada pav, misal with farsan, bhaji", "Sabudana khichdi/vada", "Puran poli, modak, shrikhand", "Chivda, farsan, bakery"]
+closing_bullets:
+  - "Oil: 3–4 teaspoons per day; go easy on peanuts and coconut."
+  - "Fasting days: choose fruit, curd, rajgira, sprouts — not sabudana."
+  - "Do not over-restrict."
