@@ -36,6 +36,11 @@ def create_app() -> FastAPI:
         app.include_router(r)
     app.mount("/static", StaticFiles(directory=str(WEB_DIR / "static")), name="static")
 
+    @app.get("/favicon.ico", include_in_schema=False)
+    def favicon():
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse("/static/favicon.svg")
+
     @app.get("/healthz", include_in_schema=False)
     def healthz():
         return JSONResponse({"ok": True})

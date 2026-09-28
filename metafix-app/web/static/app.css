@@ -1,6 +1,6 @@
 :root{--teal:#2ec9a4;--teal-d:#169e7f;--dark:#0f1c24;--soft:#f3faf7;--ink:#1d2a31;--muted:#5c6b73;--rule:#dfe8e4;
 --bg:#f6f8f7;--card:#fff;--warn:#e0a526;--warn-bg:#fff8ea;--bad:#c0392b;--bad-bg:#fdf1ef;--ok:#1f9d55}
-*{box-sizing:border-box}html,body{margin:0}
+*{box-sizing:border-box}html,body{margin:0}[hidden]{display:none!important}
 body{font-family:Lato,Carlito,"Liberation Sans",system-ui,sans-serif;font-size:15px;color:var(--ink);background:var(--bg);line-height:1.45}
 a{color:var(--teal-d)}
 header.top{background:var(--dark);color:#fff;display:flex;align-items:center;gap:18px;padding:0 18px;height:52px;position:sticky;top:0;z-index:20}

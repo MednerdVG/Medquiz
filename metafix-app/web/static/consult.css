@@ -1,8 +1,8 @@
 main{max-width:none;padding:0}
 .ws{display:grid;grid-template-columns:minmax(300px,34%) 1fr;height:calc(100vh - 52px)}
-@media(max-width:900px){.ws{grid-template-columns:1fr;height:auto}.ws .left{max-height:none;border-right:none;border-bottom:1px solid var(--rule)}}
-.left{overflow-y:auto;background:#fbfcfc;border-right:1px solid var(--rule);padding:14px}
-.right{overflow-y:auto;padding:0 16px 80px}
+@media(max-width:900px){.ws{grid-template-columns:1fr;height:auto}.ws .lpane{max-height:none;border-right:none;border-bottom:1px solid var(--rule)}}
+.lpane{overflow-y:auto;background:#fbfcfc;border-right:1px solid var(--rule);padding:14px}
+.rpane{overflow-y:auto;padding:0 16px 80px}
 .wsbar{position:sticky;top:0;background:var(--bg);z-index:5;display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap}
 .sec{background:#fff;border:1px solid var(--rule);border-radius:10px;margin:12px 0;padding:12px}
 .sec>h3{margin:0 0 10px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center}

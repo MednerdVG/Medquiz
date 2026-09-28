@@ -1,0 +1,34 @@
+# Single compose file: app + worker (reminders, RQ jobs) + Postgres + Redis.
+# Put TLS in front (Caddy / Cloud Load Balancer). Keep the VM / bucket in an Indian region (DPDP).
+services:
+  db:
+    image: postgres:16
+    environment: { POSTGRES_DB: metafix, POSTGRES_USER: metafix, POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?set it}" }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    restart: unless-stopped
+  redis:
+    image: redis:7
+    restart: unless-stopped
+  app:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://metafix:${POSTGRES_PASSWORD}@db/metafix
+      REDIS_URL: redis://redis:6379/0
+      STORAGE_DIR: /data
+    volumes: [files:/data]
+    ports: ["8000:8000"]
+    depends_on: [db, redis]
+    restart: unless-stopped
+  worker:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://metafix:${POSTGRES_PASSWORD}@db/metafix
+      REDIS_URL: redis://redis:6379/0
+      STORAGE_DIR: /data
+    volumes: [files:/data]
+    command: ["sh", "-c", "rq worker metafix --url redis://redis:6379/0 & python -m app.jobs.reminders"]
+    depends_on: [db, redis]
+    restart: unless-stopped
+volumes: { pgdata: {}, files: {} }

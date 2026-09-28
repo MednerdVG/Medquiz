@@ -166,6 +166,7 @@ def list_doctors(db: Session = Depends(get_db), p: Principal = Depends(STAFF)):
     users = {u.doctor_key: u for u in db.scalars(select(User).where(User.doctor_key.is_not(None), User.deleted_at.is_(None)))}
     return [{"key": k, "name": d.sign_name, "degrees": d.lh_degrees, "registration_no": d.registration_no,
              "sign_style": d.sign_style, "calendar_connected": bool(users.get(k) and users[k].calendar_id),
+             "signature_ready": d.sign_style != "image" or bool(d.signature_path() and d.signature_path().exists()),
              "email": users[k].email if k in users else None} for k, d in doctors().items()]
 
 

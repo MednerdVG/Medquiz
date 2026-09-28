@@ -35,7 +35,7 @@ async function load() {
   const docs = await api("GET", "/api/doctors");
   $("#docs").innerHTML = "<tr><th>Doctor</th><th>Degrees (printed as given)</th><th>Reg. no.</th><th>Signature</th><th>Calendar</th></tr>" +
     docs.map(d => `<tr><td>${esc(d.name)}</td><td>${esc(d.degrees)}</td><td>${esc(d.registration_no || "— add in doctors.yaml")}</td>
-      <td>${esc(d.sign_style)}</td><td>${d.calendar_connected ? '<span class="badge">connected</span>' : '<span class="badge warn">not connected</span>'}</td></tr>`).join("");
+      <td>${esc(d.sign_style)}${d.signature_ready ? "" : ' <span class="badge bad">signature PNG missing — add to assets/</span>'}</td><td>${d.calendar_connected ? '<span class="badge">connected</span>' : '<span class="badge warn">not connected</span>'}</td></tr>`).join("");
   if (ME.role === "owner") { loadUsers(); loadAudit(); }
 }
 async function loadUsers() {

@@ -1,0 +1,6 @@
+__pycache__
+*.db
+storage/
+out/
+.env
+.pytest_cache
