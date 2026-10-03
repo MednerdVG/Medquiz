@@ -1,5 +1,6 @@
 # Single compose file: app + worker (reminders, RQ jobs) + Postgres + Redis.
-# Put TLS in front (Caddy / Cloud Load Balancer). Keep the VM / bucket in an Indian region (DPDP).
+# Caddy in front gets a free HTTPS certificate for DOMAIN automatically.
+# Keep the VM / bucket in an Indian region (DPDP).
 services:
   db:
     image: postgres:16
@@ -17,7 +18,7 @@ services:
       REDIS_URL: redis://redis:6379/0
       STORAGE_DIR: /data
     volumes: [files:/data]
-    ports: ["8000:8000"]
+    expose: ["8000"]
     depends_on: [db, redis]
     restart: unless-stopped
   worker:
@@ -31,4 +32,11 @@ services:
     command: ["sh", "-c", "rq worker metafix --url redis://redis:6379/0 & python -m app.jobs.reminders"]
     depends_on: [db, redis]
     restart: unless-stopped
-volumes: { pgdata: {}, files: {} }
+  caddy:
+    image: caddy:2
+    environment: { DOMAIN: "${DOMAIN:?set DOMAIN in .env, e.g. app.metafix.clinic}" }
+    ports: ["80:80", "443:443"]
+    volumes: [./Caddyfile:/etc/caddy/Caddyfile:ro, caddy_data:/data]
+    depends_on: [app]
+    restart: unless-stopped
+volumes: { pgdata: {}, files: {}, caddy_data: {} }

@@ -35,7 +35,7 @@ Run the tests with `pytest`. There are 75 tests, and they cover every acceptance
 
 ```bash
 cp .env.example .env    # fill in the secrets
-docker compose up -d --build
+docker compose up -d --build   # full steps: DEPLOY.md
 ```
 
 This starts four services: `app`, `worker` (RQ jobs plus the reminder loop), `db` (Postgres 16) and `redis`. Put TLS in front of the app. Keep the VM, database and bucket in an Indian region (DPDP). Set `DEV_LOGIN=0`.

@@ -8,3 +8,5 @@ metafix-app/out/
 node_modules/
 metafix-app.zip
 metafix-app/metafix_local.db
+metafix-app/secrets/
+metafix-app/.env
